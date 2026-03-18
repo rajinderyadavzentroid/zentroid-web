@@ -120,3 +120,47 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+@media (min-width: 768px) {
+  .svc-hero-title {
+    font-size: 4rem;
+  }
+
+  .svc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .svc-process-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .svc-process-title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .svc-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .pf-hero-title {
+    font-size: 4rem;
+  }
+
+  .pf-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pf-cta-title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pf-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

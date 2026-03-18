@@ -34,7 +34,7 @@ export default function Header() {
 
               {/* Desktop Navigation */}
               <div className="header-desktop-nav">
-                <Link href="/services" className={`nav-link ${isActive('/services') ? 'nav-link-active' : ''}`}>
+                <Link href="our-service" className={`nav-link ${isActive('our-service') ? 'nav-link-active' : ''}`}>
                   Services
                 </Link>
                 <Link href="/portfolio" className={`nav-link ${isActive('/portfolio') ? 'nav-link-active' : ''}`}>
