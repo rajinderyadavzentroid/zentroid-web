@@ -112,8 +112,9 @@ body {
 
 .mobile-nav-link {
     color: #d1d5db;
-    transition: color 0.2s;
-    padding: 0.5rem 0;
+    padding: 2px 0;
+    transition: color .2s;
+    text-decoration: none;
 }
 
 .mobile-nav-link:hover {
@@ -2733,7 +2734,7 @@ body {
 }
 
 .team-cta-btn {
-    padding: 1rem 2rem;
+    padding: 10px 2rem;
     background-color: #fff200;
     color: #1a1a1a;
     border-radius: 9999px;
@@ -3090,4 +3091,28 @@ body {
 
 .contact-cta-btn-secondary:hover {
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-cta-btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.cta-btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.header-cta-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.mobile-cta-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

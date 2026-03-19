@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from "@/src/component/Layout";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Box, Package, Gamepad2, Building2, Quote, Star, Mail, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 
 export default function Home() {
@@ -40,6 +40,22 @@ export default function Home() {
 
   const [selectedModel, setSelectedModel] = useState(0);
   const [rotation, setRotation] = useState(0);
+  const [calendlyReady, setCalendlyReady] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.onload = () => setCalendlyReady(true);
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ url: "https://calendly.com/your-username" });
+    }
+  };
 
   const handleNext = () => setSelectedModel((prev) => (prev + 1) % models.length);
   const handlePrev = () => setSelectedModel((prev) => (prev - 1 + models.length) % models.length);
@@ -285,8 +301,8 @@ export default function Home() {
                 <button className="cta-btn-primary">
                   <span className="cta-btn-inner"><Mail className="cta-btn-icon" /> Start Your Project <ArrowRight className="cta-btn-arrow" /></span>
                 </button>
-                <button className="cta-btn-secondary">
-                  <span className="cta-btn-inner"><MessageCircle className="cta-btn-icon" /> Schedule a Call <ArrowRight className="cta-btn-arrow" /></span>
+                <button className="cta-btn-secondary" onClick={openCalendly} disabled={!calendlyReady}>
+                  <span className="cta-btn-inner"><MessageCircle className="cta-btn-icon" /> {calendlyReady ? "Schedule a Call" : "Loading..."} <ArrowRight className="cta-btn-arrow" /></span>
                 </button>
               </div>
               <div className="cta-features">

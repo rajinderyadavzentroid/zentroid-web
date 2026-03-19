@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Menu, X } from "lucide-react";
 import { Container } from "react-bootstrap";
@@ -11,6 +11,37 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const isActive = (path) => router.pathname === path;
+
+
+  const [calendlyReady, setCalendlyReady] = useState(false);
+
+  useEffect(() => {
+    // Add Calendly CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://assets.calendly.com/assets/external/widget.css";
+    document.head.appendChild(link);
+
+    // Add Calendly JS
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.onload = () => setCalendlyReady(true);
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+      document.head.removeChild(link);
+    };
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ url: "https://calendly.com/shaguna_zentroid/30min" });
+    }
+  };
+
+
   return (
     <header>
       <motion.nav
@@ -49,11 +80,10 @@ export default function Header() {
                 <Link href="/contact" className={`nav-link ${isActive('/contact') ? 'nav-link-active' : ''}`}>
                   Contact
                 </Link>
-                <Link href="/contact">
-                  <button className="header-cta-btn">
-                    Get Started
-                  </button>
-                </Link>
+                <button className="header-cta-btn" onClick={openCalendly} disabled={!calendlyReady}>
+                  Get Started
+                </button>
+
               </div>
 
               {/* Mobile menu button */}
@@ -73,13 +103,13 @@ export default function Header() {
                 exit={{ opacity: 0, height: 0 }}
                 className="header-mobile-nav"
               >
-                <Link href="/services" className="mobile-nav-link">Services</Link>
+                <Link href="/our-service" className="mobile-nav-link">Services</Link>
                 <Link href="/portfolio" className="mobile-nav-link">Portfolio</Link>
                 <Link href="/about-us" className="mobile-nav-link">About</Link>
                 <Link href="/our-team" className="mobile-nav-link">Team</Link>
                 <Link href="/contact" className="mobile-nav-link">Contact</Link>
                 <Link href="/contact">
-                  <button className="mobile-cta-btn">
+                  <button className="mobile-cta-btn" onClick={openCalendly} disabled={!calendlyReady}>
                     Get Started
                   </button>
                 </Link>

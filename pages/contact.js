@@ -2,12 +2,28 @@ import Head from "next/head";
 import Layout from "@/src/component/Layout";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Instagram } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 
 export default function Contact() {
 
   const [formData, setFormData] = useState({ name: "", email: "", projectDetails: "" });
+  const [calendlyReady, setCalendlyReady] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.onload = () => setCalendlyReady(true);
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ url: "https://calendly.com/your-username" });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -138,9 +154,9 @@ export default function Contact() {
                 <a href="mailto:hello@zentroid.com">
                   <button className="contact-cta-btn-primary">Email Us</button>
                 </a>
-                <a href="tel:+15551234567">
-                  <button className="contact-cta-btn-secondary">Call Us</button>
-                </a>
+                <button className="contact-cta-btn-secondary" onClick={openCalendly} disabled={!calendlyReady}>
+                  {calendlyReady ? "Schedule a Call" : "Loading..."}
+                </button>
               </div>
             </motion.div>
           </Container>
