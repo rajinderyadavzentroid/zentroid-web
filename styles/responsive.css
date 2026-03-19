@@ -11,6 +11,26 @@
     display: none;
   }
 
+  .cta-btns {
+    flex-direction: row;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .founder-badge-card {
+    position: static !important;
+    margin-bottom: 30px;
+  }
+
+  .founder-badge-card {
+    margin-top: 40px;
+  }
+
+  .founder-mobile-stats {
+    margin-top: 0rem;
+  }
 
 }
 
@@ -101,11 +121,7 @@
   }
 }
 
-@media (min-width: 576px) {
-  .cta-btns {
-    flex-direction: row;
-  }
-}
+@media (min-width: 576px) {}
 
 @media (min-width: 768px) {
   .cta-title {
@@ -226,5 +242,53 @@
 @media (min-width: 1024px) {
   .contact-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .founder-profile-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .founder-info {
+    text-align: left;
+  }
+
+  .founder-mobile-socials {
+    justify-content: flex-start;
+  }
+
+  .founder-img {
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .founder-mobile-stats {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .founder-side-socials {
+    display: flex;
+  }
+
+  .founder-stats-card {
+    display: flex;
+  }
+
+  .founder-mobile-socials {
+    display: none;
+  }
+
+  .founder-badge-card-tr {
+    top: -1.5rem;
+    right: -1.5rem;
+  }
+
+  .founder-badge-card-bl {
+    bottom: -2rem;
+    left: -1.5rem;
   }
 }

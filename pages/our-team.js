@@ -2,8 +2,10 @@ import Head from "next/head";
 import Layout from "@/src/component/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin, Twitter, Award, Briefcase, Users, TrendingUp } from "lucide-react";
 import { Container } from "react-bootstrap";
+import NextImage from "next/image";
+import ShagunaKhetarpal from "@/src/images/shaguna-khetarpal.jpg";
 
 export default function OurTeam() {
 
@@ -69,6 +71,100 @@ export default function OurTeam() {
               <h1 className="team-hero-title">Meet Our Team</h1>
               <p className="team-hero-desc">Talented artists and designers dedicated to bringing your 3D visions to life</p>
             </motion.div>
+          </Container>
+        </section>
+
+        {/* Founder Section */}
+        <section className="founder-section">
+          <div className="founder-bg">
+            <div className="founder-blob founder-blob-1" />
+            <div className="founder-blob founder-blob-2" />
+          </div>
+          <Container>
+            <div className="founder-inner">
+
+              {/* Left Social Icons */}
+              <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }} viewport={{ once: true }} className="founder-side-socials">
+                <motion.a href="#" whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
+                  <Linkedin className="founder-side-social-icon" />
+                </motion.a>
+                <motion.a href="#" whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
+                  <Twitter className="founder-side-social-icon" />
+                </motion.a>
+              </motion.div>
+
+              {/* Cards Container */}
+              <div className="founder-cards-wrap">
+
+                {/* Main Profile Card */}
+                <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="founder-main-card">
+                  <div className="founder-card-corner founder-card-corner-tl" />
+                  <div className="founder-card-corner founder-card-corner-br" />
+                  <div className="founder-profile-row">
+                    {/* Image */}
+                    <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }} whileHover={{ scale: 1.05 }} className="founder-img-wrap">
+                      <NextImage className="founder-img" src={ShagunaKhetarpal} alt="Shaguna Khetarpal - Founder" />
+                      <div className="founder-img-glow" />
+                    </motion.div>
+                    {/* Info */}
+                    <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} className="founder-info">
+                      <h3 className="founder-name">Michael Zentroid</h3>
+                      <p className="founder-role">Founder & CEO</p>
+                      <p className="founder-bio">Visionary entrepreneur with 15+ years of experience in 3D technology and digital innovation. Passionate about pushing the boundaries of creative possibilities and empowering teams to transform imagination into reality.</p>
+                      {/* Mobile Socials */}
+                      <div className="founder-mobile-socials">
+                        <a href="#" className="founder-mobile-social-btn"><Linkedin className="founder-mobile-social-icon" /></a>
+                        <a href="#" className="founder-mobile-social-btn"><Twitter className="founder-mobile-social-icon" /></a>
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {/* Badge Card - Top Right */}
+                <motion.div initial={{ opacity: 0, x: 30, y: -20 }} whileInView={{ opacity: 1, x: 0, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} viewport={{ once: true }} whileHover={{ y: -5 }} className="founder-badge-card founder-badge-card-tr">
+                  <div className="founder-badge-icon-wrap"><Award className="founder-badge-icon" /></div>
+                  <div>
+                    <div className="founder-badge-value">150+</div>
+                    <p className="founder-badge-label">Projects Completed</p>
+                  </div>
+                </motion.div>
+
+                {/* Badge Card - Bottom Left */}
+                <motion.div initial={{ opacity: 0, x: -30, y: 20 }} whileInView={{ opacity: 1, x: 0, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }} viewport={{ once: true }} whileHover={{ y: -5 }} className="founder-badge-card founder-badge-card-bl">
+                  <div className="founder-badge-icon-wrap"><Briefcase className="founder-badge-icon" /></div>
+                  <div>
+                    <div className="founder-badge-value">15+</div>
+                    <p className="founder-badge-label">Years Experience</p>
+                  </div>
+                </motion.div>
+
+                {/* Stats Card - Middle Right */}
+                <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.6 }} viewport={{ once: true }} whileHover={{ y: -5 }} className="founder-stats-card">
+                  <div className="founder-stat-row">
+                    <div className="founder-stat-icon-wrap"><Users className="founder-stat-icon" /></div>
+                    <div><div className="founder-stat-value">50+</div><p className="founder-stat-label">Team Members</p></div>
+                  </div>
+                  <div className="founder-stat-row">
+                    <div className="founder-stat-icon-wrap"><TrendingUp className="founder-stat-icon" /></div>
+                    <div><div className="founder-stat-value">98%</div><p className="founder-stat-label">Success Rate</p></div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Mobile Stats */}
+            <div className="founder-mobile-stats">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} viewport={{ once: true }} className="founder-mobile-stat-card">
+                <Users className="founder-mobile-stat-icon" />
+                <div className="founder-badge-value">50+</div>
+                <p className="founder-badge-label">Team Members</p>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} viewport={{ once: true }} className="founder-mobile-stat-card">
+                <TrendingUp className="founder-mobile-stat-icon" />
+                <div className="founder-badge-value">98%</div>
+                <p className="founder-badge-label">Success Rate</p>
+              </motion.div>
+            </div>
           </Container>
         </section>
 

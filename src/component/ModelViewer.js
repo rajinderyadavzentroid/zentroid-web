@@ -59,7 +59,12 @@ export default function ModelViewer({
         <Environment preset="city" />
         <ContactShadows position={[0, position[1] - 1, 0]} opacity={0.4} scale={6} blur={2} />
       </Suspense>
-      <OrbitControls enableZoom={true} enablePan={true} />
+      <OrbitControls
+        enableZoom={true}
+        enablePan={true}
+        panSpeed={1.5}
+        screenSpacePanning={true}
+      />
     </Canvas>
   );
 }

@@ -12,12 +12,23 @@ const ModelThumb = dynamic(() => import("@/src/component/ModelViewer").then(m =>
 export default function Home() {
 
   const models = [
-    { id: 1, name: "Fendi Bag", category: "Fashion", glb: "/models/fendi-bag.glb" },         // Replace: /models/model-2.glb
-    { id: 2, name: "Modern Tech Product", category: "Product Design", glb: "/models/north-face-base-camp-rolling.glb" },  // Replace: /models/model-3.glb
-    { id: 3, name: "Architectural Render", category: "Architecture", glb: "/models/fendi-bag.glb" },   // Replace: /models/model-4.glb
-    { id: 4, name: "Game Character", category: "Gaming", glb: "/models/fendi-bag.glb" },              // Replace: /models/model-5.glb
-    { id: 5, name: "VR Experience", category: "AR/VR", glb: "/models/fendi-bag.glb" },               // Replace: /models/model-6.glb
-    { id: 6, name: "Industrial Design", category: "Product Design", glb: "/models/fendi-bag.glb" },   // Replace: /models/model-7.glb
+    { id: 1, name: "Fendi Bag", category: "Fashion", glb: "/models/fendi-bag.glb", viewerProps: { scale: 10, position: [0, -0.9, 0], cameraPosition: [0, 1, 8], fov: 20 } },         // Replace: /models/model-2.glb
+    { id: 2, name: "Modern Tech Product", category: "Product Design", glb: "/models/north-face-base-camp-rolling.glb", viewerProps: { scale: 10, position: [0, -0.7, 0], cameraPosition: [0, 1, 8], fov: 20 } },  // Replace: /models/model-3.glb
+    { id: 3, name: "Architectural Render", category: "Architecture", glb: "/models/gaming-chair-compressed.glb", viewerProps: { scale: 4, position: [0, -0.9, 0], cameraPosition: [0, 1, 8], fov: 20 } },
+    {
+      id: 4,
+      name: "Nike Air Sneakers",
+      category: "Fashion",
+      glb: "/models/nike-air-sneakers.glb",
+      viewerProps: {
+        scale: 0.08,
+        position: [0, -0.6, 0],
+        cameraPosition: [0, 1, 10],
+        fov: 20
+      }
+    },
+    { id: 5, name: "Kuboraum Sun", category: "AR/VR", glb: "/models/kuboraum-sun.glb", viewerProps: { scale: 0.1, position: [0, -0.2, 0], cameraPosition: [0, 1, 8], fov: 20 } },
+    { id: 6, name: "Graham Fortress", category: "Product Design", glb: "/models/graham-fortress.glb", viewerProps: { scale: 8, position: [0, -0.8, 0], cameraPosition: [0, 1, 8], fov: 20 } },
   ];
 
   const services = [
@@ -133,10 +144,10 @@ export default function Home() {
                     <div className="showcase-img-wrap">
                       <ModelViewer
                         path={models[selectedModel].glb}
-                        scale={6}
-                        position={[0, 0, 0]}
-                        cameraPosition={[0, 0, 10]}
-                        fov={15}
+                        scale={models[selectedModel].viewerProps?.scale ?? 6}
+                        position={models[selectedModel].viewerProps?.position ?? [0, 0, 0]}
+                        cameraPosition={models[selectedModel].viewerProps?.cameraPosition ?? [0, 0, 10]}
+                        fov={models[selectedModel].viewerProps?.fov ?? 15}
                       />
                     </div>
                     <div className="showcase-glow" />
@@ -158,10 +169,10 @@ export default function Home() {
                       <button key={model.id} onClick={() => setSelectedModel(index)} className={`showcase-thumb ${selectedModel === index ? 'showcase-thumb-active' : ''}`}>
                         <ModelThumb
                           path={model.glb}
-                          scale={8}               
-                          position={[0, -0.7, 0]} 
-                          cameraPosition={[0, 0, 7]}
-                          fov={20}
+                          scale={model.viewerProps?.scale ?? 8}
+                          position={model.viewerProps?.position ?? [0, -0.7, 0]}
+                          cameraPosition={model.viewerProps?.cameraPosition ?? [0, 0, 7]}
+                          fov={model.viewerProps?.fov ?? 20}
                         />
                         <div className="showcase-thumb-overlay" />
                       </button>
