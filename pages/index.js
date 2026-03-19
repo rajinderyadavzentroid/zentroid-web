@@ -3,17 +3,21 @@ import Layout from "@/src/component/Layout";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Box, Package, Gamepad2, Building2, Quote, Star, Mail, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Container } from "react-bootstrap";
+
+const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), { ssr: false });
+const ModelThumb = dynamic(() => import("@/src/component/ModelViewer").then(m => ({ default: m.ModelThumb })), { ssr: false });
 
 export default function Home() {
 
   const models = [
-    { id: 1, name: "Abstract Geometry Cube", category: "Art & Design", image: "https://images.unsplash.com/photo-1753454116027-4f3ff53af389?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 2, name: "Modern Tech Product", category: "Product Design", image: "https://images.unsplash.com/photo-1766503206581-6824e98f49de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 3, name: "Architectural Render", category: "Architecture", image: "https://images.unsplash.com/photo-1742919301573-3c36f6d71b2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 4, name: "Game Character", category: "Gaming", image: "https://images.unsplash.com/photo-1636189239307-9f3a701f30a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 5, name: "VR Experience", category: "AR/VR", image: "https://images.unsplash.com/photo-1758523670550-223a01cd7764?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 6, name: "Industrial Design", category: "Product Design", image: "https://images.unsplash.com/photo-1589089851450-0396bf7deeb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
+    { id: 1, name: "Fendi Bag", category: "Fashion", glb: "/models/fendi-bag.glb" },         // Replace: /models/model-2.glb
+    { id: 2, name: "Modern Tech Product", category: "Product Design", glb: "/models/north-face-base-camp-rolling.glb" },  // Replace: /models/model-3.glb
+    { id: 3, name: "Architectural Render", category: "Architecture", glb: "/models/fendi-bag.glb" },   // Replace: /models/model-4.glb
+    { id: 4, name: "Game Character", category: "Gaming", glb: "/models/fendi-bag.glb" },              // Replace: /models/model-5.glb
+    { id: 5, name: "VR Experience", category: "AR/VR", glb: "/models/fendi-bag.glb" },               // Replace: /models/model-6.glb
+    { id: 6, name: "Industrial Design", category: "Product Design", glb: "/models/fendi-bag.glb" },   // Replace: /models/model-7.glb
   ];
 
   const services = [
@@ -126,9 +130,15 @@ export default function Home() {
               <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="showcase-viewer-wrap">
                 <div className="showcase-viewer">
                   <div className="showcase-glass">
-                    <motion.div className="showcase-img-wrap" animate={{ rotateY: rotation }} transition={{ duration: 0.5 }}>
-                      <img src={models[selectedModel].image} alt={models[selectedModel].name} className="showcase-img" />
-                    </motion.div>
+                    <div className="showcase-img-wrap">
+                      <ModelViewer
+                        path={models[selectedModel].glb}
+                        scale={6}
+                        position={[0, 0, 0]}
+                        cameraPosition={[0, 0, 10]}
+                        fov={15}
+                      />
+                    </div>
                     <div className="showcase-glow" />
                   </div>
                   <button onClick={handlePrev} className="showcase-nav-btn showcase-nav-left"><ChevronLeft className="showcase-nav-icon" /></button>
@@ -146,7 +156,13 @@ export default function Home() {
                   <div className="showcase-gallery-grid">
                     {models.map((model, index) => (
                       <button key={model.id} onClick={() => setSelectedModel(index)} className={`showcase-thumb ${selectedModel === index ? 'showcase-thumb-active' : ''}`}>
-                        <img src={model.image} alt={model.name} className="showcase-thumb-img" />
+                        <ModelThumb
+                          path={model.glb}
+                          scale={8}               
+                          position={[0, -0.7, 0]} 
+                          cameraPosition={[0, 0, 7]}
+                          fov={20}
+                        />
                         <div className="showcase-thumb-overlay" />
                       </button>
                     ))}
