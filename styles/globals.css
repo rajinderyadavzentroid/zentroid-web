@@ -2127,7 +2127,7 @@ body {
 }
 
 .pf-filter-btn {
-    padding: 12px 1.5rem;
+    padding: 10 px 1.5rem;
     border-radius: 9999px;
     font-weight: 600;
     border: 1px solid #e5e7eb;
@@ -2311,7 +2311,7 @@ body {
 }
 
 .pf-cta-btn {
-    padding: 1rem 2rem;
+    padding: 10px 2rem;
     background-color: #fff200;
     color: #1a1a1a;
     border-radius: 9999px;
