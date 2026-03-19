@@ -40,10 +40,10 @@ export default function Header() {
                 <Link href="/portfolio" className={`nav-link ${isActive('/portfolio') ? 'nav-link-active' : ''}`}>
                   Portfolio
                 </Link>
-                <Link href="/about" className={`nav-link ${isActive('/about') ? 'nav-link-active' : ''}`}>
+                <Link href="/about-us" className={`nav-link ${isActive('/about-us') ? 'nav-link-active' : ''}`}>
                   About
                 </Link>
-                <Link href="/team" className={`nav-link ${isActive('/team') ? 'nav-link-active' : ''}`}>
+                <Link href="/our-team" className={`nav-link ${isActive('/our-team') ? 'nav-link-active' : ''}`}>
                   Team
                 </Link>
                 <Link href="/contact" className={`nav-link ${isActive('/contact') ? 'nav-link-active' : ''}`}>
@@ -75,8 +75,8 @@ export default function Header() {
               >
                 <Link href="/services" className="mobile-nav-link">Services</Link>
                 <Link href="/portfolio" className="mobile-nav-link">Portfolio</Link>
-                <Link href="/about" className="mobile-nav-link">About</Link>
-                <Link href="/team" className="mobile-nav-link">Team</Link>
+                <Link href="/about-us" className="mobile-nav-link">About</Link>
+                <Link href="/our-team" className="mobile-nav-link">Team</Link>
                 <Link href="/contact" className="mobile-nav-link">Contact</Link>
                 <Link href="/contact">
                   <button className="mobile-cta-btn">
