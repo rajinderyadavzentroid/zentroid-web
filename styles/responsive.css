@@ -32,6 +32,148 @@
     margin-top: 0rem;
   }
 
+  .hero-section {
+    padding: 120px 0px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-stats {
+    gap: 10px;
+  }
+
+  .hero-stat-number {
+    font-size: 25px;
+  }
+
+  .showcase-title {
+    font-size: 28px;
+  }
+
+  .showcase-desc {
+    font-size: 18px;
+  }
+
+  .services-title {
+    font-size: 28px;
+  }
+
+  .services-desc {
+    color: #4b5563;
+    max-width: auto;
+    margin: 0px;
+    font-size: 18px;
+  }
+
+  .portfolio-title {
+    font-size: 28px;
+  }
+
+  .portfolio-desc {
+    font-size: 18px;
+  }
+
+  .testimonials-title {
+    font-size: 28px;
+  }
+
+  .testimonials-desc {
+    font-size: 18px;
+  }
+
+  .cta-title {
+    font-size: 30px;
+  }
+
+  .cta-desc {
+    font-size: 18px;
+  }
+
+  .svc-hero-title {
+    font-size: 30px;
+  }
+
+  .svc-hero-desc {
+    font-size: 18px;
+  }
+
+  .svc-process-title {
+    font-size: 28px;
+  }
+
+  .svc-process-desc {
+    font-size: 18px;
+  }
+
+  .svc-process-grid {
+    gap: 10px;
+  }
+
+  .svc-cta-box {
+    padding: 30px 20px;
+  }
+
+  .svc-cta-title {
+    font-size: 28px;
+  }
+
+  .svc-cta-desc {
+    font-size: 18px;
+  }
+
+  .pf-hero-title {
+    font-size: 30px;
+  }
+
+  .pf-hero-desc {
+    font-size: 18px;
+  }
+
+  .pf-cta-title {
+    font-size: 28px;
+  }
+
+  .pf-cta-desc {
+    font-size: 18px;
+  }
+
+
+  .about-hero-title {
+    font-size: 30px;
+    font-size: 30px;
+  }
+
+  .about-hero-title {
+    font-size: 30px;
+  }
+
+  .about-hero-desc {
+    font-size: 18px;
+  }
+
+  .about-story-title {
+    font-size: 28px;
+  }
+
+  .about-why-title {
+    font-size: 28px;
+  }
+
+  .about-why-desc {
+    font-size: 18px;
+  }
+
+  .about-stats-title {
+    font-size: 30px;
+  }
+
+
+  .about-stats-desc {
+    font-size: 18px;
+  }
+
 }
 
 @media (min-width: 768px) {

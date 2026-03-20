@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Twitter, Linkedin, Instagram, Github, Mail, Phone, MapPin } from "lucide-react";
+import { Linkedin, Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { Container } from "react-bootstrap";
 import Image from "next/image";
 import LogoMain from "../images/main-logo.png";
@@ -22,10 +22,10 @@ export default function Footer() {
                 Creating premium 3D models and visualizations that bring your ideas to life with unmatched quality and precision.
               </p>
               <div className="footer-socials">
-                <a href="#" className="footer-social-btn"><Twitter className="w-5 h-5" /></a>
-                <a href="#" className="footer-social-btn"><Linkedin className="w-5 h-5" /></a>
-                <a href="#" className="footer-social-btn"><Instagram className="w-5 h-5" /></a>
-                <a href="#" className="footer-social-btn"><Github className="w-5 h-5" /></a>
+                {/* <a href="#" className="footer-social-btn"><svg viewBox="0 0 24 24" fill="currentColor" style={{width:"20px",height:"20px"}}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a> */}
+                <a href="https://www.linkedin.com/company/zentroid" className="footer-social-btn"><Linkedin className="w-5 h-5" /></a>
+                <a href="https://www.instagram.com/zentroid.studios/" className="footer-social-btn"><Instagram className="w-5 h-5" /></a>
+                {/* <a href="#" className="footer-social-btn"><Facebook className="w-5 h-5" /></a> */}
               </div>
             </div>
 
@@ -33,11 +33,11 @@ export default function Footer() {
             <div>
               <h3 className="footer-heading">Services</h3>
               <ul className="footer-list">
-                <li><Link href="/services" className="footer-link">3D Modeling</Link></li>
-                <li><Link href="/services" className="footer-link">Product Visualization</Link></li>
-                <li><Link href="/services" className="footer-link">Game Assets</Link></li>
-                <li><Link href="/services" className="footer-link">Architectural Models</Link></li>
-                <li><Link href="/services" className="footer-link">AR/VR Solutions</Link></li>
+                <li><Link href="/our-service" className="footer-link">3D Modeling</Link></li>
+                <li><Link href="/our-service" className="footer-link">Product Visualization</Link></li>
+                <li><Link href="/our-service" className="footer-link">Game Assets</Link></li>
+                <li><Link href="/our-service" className="footer-link">Architectural Models</Link></li>
+                <li><Link href="/our-service" className="footer-link">AR/VR Solutions</Link></li>
               </ul>
             </div>
 
@@ -45,11 +45,11 @@ export default function Footer() {
             <div>
               <h3 className="footer-heading">Company</h3>
               <ul className="footer-list">
-                <li><Link href="/about" className="footer-link">About Us</Link></li>
-                <li><Link href="/team" className="footer-link">Our Team</Link></li>
                 <li><Link href="/portfolio" className="footer-link">Portfolio</Link></li>
-                <li><Link href="/contact" className="footer-link">Careers</Link></li>
-                <li><Link href="/contact" className="footer-link">Blog</Link></li>
+                <li><Link href="/about-us" className="footer-link">About Us</Link></li>
+                <li><Link href="/our-team" className="footer-link">Our Team</Link></li>
+                <li><Link href="/contact" className="footer-link">
+                  Contact</Link></li>
               </ul>
             </div>
 

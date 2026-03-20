@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from "@/src/component/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Linkedin, Twitter, Award, Briefcase, Users, TrendingUp } from "lucide-react";
+import { Linkedin, Twitter, Award, Briefcase, Users, TrendingUp, Instagram } from "lucide-react";
 import { Container } from "react-bootstrap";
 import NextImage from "next/image";
 import ShagunaKhetarpal from "@/src/images/shaguna-khetarpal.jpg";
@@ -85,11 +85,11 @@ export default function OurTeam() {
 
               {/* Left Social Icons */}
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }} viewport={{ once: true }} className="founder-side-socials">
-                <motion.a href="#" whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
+                <motion.a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQGUGbFVomdF5AAAAZ0F1qPwvNCTWZuhykCOW8dn1Wvr5ob-tCHN3UjKT48ClndU2EXaVOk567JYEzMbzxfil2KXdb_md0YYkRC9SeOthtbrGxDzHbs7SUSzgGpaAPut1yPu4T4=&original_referer=https://zentroid.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fshagunakhetarpal%2F"  whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
                   <Linkedin className="founder-side-social-icon" />
                 </motion.a>
-                <motion.a href="#" whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
-                  <Twitter className="founder-side-social-icon" />
+                <motion.a href="https://www.instagram.com/shaguna_khetarpal" whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
+                  <Instagram className="founder-side-social-icon" />
                 </motion.a>
               </motion.div>
 
@@ -108,13 +108,13 @@ export default function OurTeam() {
                     </motion.div>
                     {/* Info */}
                     <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} className="founder-info">
-                      <h3 className="founder-name">Michael Zentroid</h3>
-                      <p className="founder-role">Founder & CEO</p>
-                      <p className="founder-bio">Visionary entrepreneur with 15+ years of experience in 3D technology and digital innovation. Passionate about pushing the boundaries of creative possibilities and empowering teams to transform imagination into reality.</p>
+                      <h3 className="founder-name">Shaguna Khetarpal</h3>
+                      <p className="founder-role">Founder</p>
+                      <p className="founder-bio">Driven by curiosity and an entrepreneurial spirit, I founded Zentroid Studios after years in sales, HR, and the 3D industry. Today, we create immersive AR/VR experiences, virtual try-ons, and 360 product viewers with a passion for innovation and a client-first approach, redefining how brands connect with the world.</p>
                       {/* Mobile Socials */}
                       <div className="founder-mobile-socials">
-                        <a href="#" className="founder-mobile-social-btn"><Linkedin className="founder-mobile-social-icon" /></a>
-                        <a href="#" className="founder-mobile-social-btn"><Twitter className="founder-mobile-social-icon" /></a>
+                        <a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQGUGbFVomdF5AAAAZ0F1qPwvNCTWZuhykCOW8dn1Wvr5ob-tCHN3UjKT48ClndU2EXaVOk567JYEzMbzxfil2KXdb_md0YYkRC9SeOthtbrGxDzHbs7SUSzgGpaAPut1yPu4T4=&original_referer=https://zentroid.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fshagunakhetarpal%2F" className="founder-mobile-social-btn"><Linkedin className="founder-mobile-social-icon" /></a>
+                        <a href="https://www.instagram.com/shaguna_khetarpal" className="founder-mobile-social-btn"><Instagram className="founder-mobile-social-icon" /></a>
                       </div>
                     </motion.div>
                   </div>
