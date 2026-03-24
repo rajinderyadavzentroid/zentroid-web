@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="footer-bottom-inner">
               <p className="footer-copy">© 2026 Zentroid Studios Pvt Ltd.</p>
               <div className="footer-bottom-links">
-                <a href="#" className="footer-bottom-link">Privacy Policy</a>
+                <a href="/privacy-policy" className="footer-bottom-link">Privacy Policy</a>
                 <a href="#" className="footer-bottom-link">Terms of Service</a>
                 <a href="#" className="footer-bottom-link">Cookie Policy</a>
               </div>
