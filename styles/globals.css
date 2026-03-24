@@ -3008,13 +3008,17 @@ body {
 .contact-map-placeholder {
     width: 100%;
     height: 16rem;
-    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    /* background: linear-gradient(135deg, #f3f4f6, #e5e7eb); */
     border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+}
+
+.contact-map-placeholder iframe {
+    border-radius: 10px;
 }
 
 .contact-map-icon {

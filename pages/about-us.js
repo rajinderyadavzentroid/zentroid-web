@@ -8,10 +8,12 @@ import { Container } from "react-bootstrap";
 export default function AboutUs() {
 
   const whyUs = [
-    { icon: Award, title: "High Quality Work", description: "Industry-leading standards with meticulous attention to detail in every project" },
-    { icon: Clock, title: "Fast Delivery", description: "Efficient workflows and dedicated teams ensure on-time project completion" },
-    { icon: Users, title: "Experienced Artists", description: "Talented professionals with years of expertise in 3D modeling and design" },
-    { icon: Sparkles, title: "Modern Tools", description: "Latest software and technology for cutting-edge 3D visualization" },
+    { icon: Award, title: "Exceptional 85% First-Pass Rate", description: "We maintain an 85% first-pass completion rate, ensuring most projects meet client specifications on the first submission, resulting in faster delivery and lower costs." },
+    { icon: Clock, title: "In-House QA & Training", description: "Our dedicated QA team and training programs ensure consistent model quality, with rigorous checks reducing rework and accelerating delivery." },
+    { icon: Target, title: "Commitment to Licensed Software", description: "We use only fully licensed, industry-standard software unlike most peers—ensuring compatibility, security, and access to the latest features, with licenses procured as needed for projects." },
+    { icon: Sparkles, title: "Client-Centric Collaboration", description: "We offer flexible, time-zone-aligned support with seamless workflows and swift, responsive communication for smooth collaboration and timely project delivery." },
+    { icon: Users, title: "Scalable Talent Pool", description: "India’s large 3D talent pool enables rapid project scaling without affecting quality, communication, or collaborative workflows." },
+    { icon: Eye, title: "Safe and Stable Work Environment", description: "Our office in Chandigarh, one of India’s cleanest and safest cities, provides a secure, stable, and highly productive environment for our team." },
   ];
 
   const stats = [
@@ -36,7 +38,13 @@ export default function AboutUs() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="about-hero-content">
               <h1 className="about-hero-title">About Zentroid</h1>
               <p className="about-hero-desc">
-                We are a creative and professional 3D modeling studio pushing the boundaries of digital art and innovation.
+                Zentroid Studios Private Limited is a Chandigarh-based 3D  company.
+              </p>
+              <p className="about-hero-desc">
+                We deliver exceptional 3D models, scan clean-ups, and fashion visualizations tailored to e-commerce and AR/VR applications.
+              </p>
+              <p className="about-hero-desc">
+                To date, we’ve delivered 5,000+ models and built a 30+ person team, reflecting our rapid growth and experience.
               </p>
             </motion.div>
           </Container>
@@ -47,20 +55,17 @@ export default function AboutUs() {
           <Container>
             <div className="about-story-grid">
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-                <h2 className="about-story-title">Our Story</h2>
+                <h2 className="about-story-title">Our Core Values</h2>
                 <p className="about-story-text">
-                  Founded with a passion for 3D art and technology, Zentroid has grown into a leading creative studio
-                  serving game studios, product designers, architecture firms, AR/VR companies, and startups worldwide.
+                  At Zentroid Studios, our culture is built on a foundation of client-first thinking, creativity, and collaboration. We believe in bold ideas, open communication, and attention to detail—values that drive us to deliver outstanding outcomes. Every project is approached with accountability and integrity, ensuring that freedom is balanced with responsibility.
                 </p>
                 <p className="about-story-text">
-                  Our team of talented 3D artists and designers brings ideas to life with precision, creativity,
-                  and cutting-edge technology. We believe in delivering not just models, but complete visual experiences
-                  that captivate and inspire.
+                  We foster an environment of continuous learning, diversity, and inclusivity, where every voice is valued and respected. Our people are encouraged to take ownership of their work, recognizing the impact they create for our clients and the team. Along the way, we celebrate every success—big or small—because we know that collective achievement fuels excellence and inspires us to keep pushing creative limits.
                 </p>
-                <p className="about-story-text">
+                {/* <p className="about-story-text">
                   From concept to final render, we work closely with our clients to ensure every project exceeds
                   expectations and stands out in today's competitive digital landscape.
-                </p>
+                </p> */}
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="about-story-img-wrap">
                 <img

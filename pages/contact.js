@@ -37,15 +37,15 @@ export default function Contact() {
   };
 
   const contactInfo = [
-    { icon: Mail, label: "Email", value: "hello@zentroid.com", href: "mailto:hello@zentroid.com" },
-    { icon: Phone, label: "Phone", value: "+1 (555) 123-4567", href: "tel:+15551234567" },
-    { icon: MapPin, label: "Office Location", value: "123 Creative Avenue, San Francisco, CA 94102, United States", href: null },
+    { icon: Mail, label: "Email", value: "shaguna@zentroid.com", href: "mailto:shaguna@zentroid.com" },
+    // { icon: Phone, label: "Phone", value: "+1 (555) 123-4567", href: "tel:+15551234567" },
+    { icon: MapPin, label: "Office Location", value: "Zentroid Studios Pvt. Ltd., S.A, S Infotech, World Tech 67, Sahibzada Ajit Singh Nagar, Punjab 160062", href: null },
   ];
 
   const socials = [
-    { icon: Linkedin, href: "#" },
-    { icon: Twitter, href: "#" },
-    { icon: Instagram, href: "#" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/zentroid" },
+    // { icon: Twitter, href: "#" },
+    { icon: Instagram, href: "https://www.instagram.com/zentroid.studios/" },
   ];
 
   return (
@@ -134,8 +134,7 @@ export default function Contact() {
 
                 <div className="contact-map-card">
                   <div className="contact-map-placeholder">
-                    <MapPin className="contact-map-icon" />
-                    <p className="contact-map-label">Map View</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3431.3043660205485!2d76.72325657705456!3d30.681711388094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fefaa5715d3df%3A0xd17264f32b54ae50!2sZentroid%20Studios%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1774338955197!5m2!1sen!2sin" width="100%" height="250" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
                   </div>
                 </div>
 
@@ -151,7 +150,7 @@ export default function Contact() {
               <h2 className="contact-cta-title">Start Your 3D Project Today</h2>
               <p className="contact-cta-desc">Let's transform your ideas into stunning 3D reality</p>
               <div className="contact-cta-btns">
-                <a href="mailto:hello@zentroid.com">
+                <a href="mailto:shaguna@zentroid.com">
                   <button className="contact-cta-btn-primary">Email Us</button>
                 </a>
                 <button className="contact-cta-btn-secondary" onClick={openCalendly} disabled={!calendlyReady}>

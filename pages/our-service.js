@@ -9,41 +9,35 @@ export default function OurServices() {
 
   const services = [
     {
-      icon: Box,
-      title: "3D Product Modeling",
-      description: "High-quality product models for e-commerce, marketing, and presentations. Perfect for showcasing your products in stunning detail.",
-      features: ["Photo-realistic renders", "Multiple angles", "Optimized for web"],
-    },
-    {
-      icon: Gamepad2,
-      title: "Game Assets Creation",
-      description: "Custom game-ready 3D assets including characters, props, environments, and more. Optimized for performance.",
-      features: ["Low-poly optimization", "PBR textures", "Multiple LODs"],
-    },
-    {
-      icon: Building2,
-      title: "Architectural 3D Models",
-      description: "Detailed architectural visualizations for real estate, interior design, and construction projects.",
-      features: ["Interior & exterior", "Lighting design", "Material library"],
+      icon: Layers,
+      title: "Low-Poly 3D Models",
+      description: "We specialise in low-poly 3D models while maintaining the utmost level of detail and quality to ensure models run smoothly on any AR platform with glitches and 0 loading time. We can cater to file sizes as low as 2MB. Note: We support all file formats like glb, gltf, usdz, obj, fbx etc.",
     },
     {
       icon: Sparkles,
-      title: "3D Rendering & Visualization",
-      description: "Professional rendering services that bring your ideas to life with stunning visual quality and realism.",
-      features: ["4K rendering", "Animation support", "Quick turnaround"],
+      title: "3D Scan-Clean Ups",
+      description: "We deal in professional Retopology of 3D scans. Note: We are highly proficient in Retopology using softwares like Maya and ZBrushFrom Shoes to Clothes, we can clean and refine everything. Note: We are highly proficient in Retopology using softwares like Maya and ZBrush.",
     },
     {
       icon: Glasses,
-      title: "AR/VR Ready Models",
-      description: "Optimized 3D models specifically designed for augmented and virtual reality applications.",
-      features: ["Mobile optimized", "Interactive elements", "Cross-platform"],
+      title: "3D Fashion Models",
+      description: "Your go to 3D partner for all your Fashion related 3D projects, from clothes to Jewellery to accessories, we can do it all for you. Note: We are proficient with: Marvellous Designer and CLO3D",
     },
     {
-      icon: Layers,
-      title: "Custom 3D Assets",
-      description: "Tailored 3D solutions for unique projects and specific requirements. We bring your vision to reality.",
-      features: ["Unlimited revisions", "Full ownership", "Source files included"],
+      icon: Box,
+      title: "Render Ready 3D Models",
+      description: "We can help you with render ready 3D high quality 3D models so that your render never misses out on any details. Note: Our Software Proficiency lies in: V-Ray, Arnold, Marmoset, Blender, Maya, Substance etc.",
     },
+    // {
+    //   icon: Glasses,
+    //   title: "AR/VR Ready Models",
+    //   description: "Optimized 3D models specifically designed for augmented and virtual reality applications.",
+    // },
+    // {
+    //   icon: Layers,
+    //   title: "Custom 3D Assets",
+    //   description: "Tailored 3D solutions for unique projects and specific requirements. We bring your vision to reality.",
+    // },
   ];
 
   const process = [
@@ -84,17 +78,9 @@ export default function OurServices() {
                   </div>
                   <h3 className="svc-card-title">{service.title}</h3>
                   <p className="svc-card-desc">{service.description}</p>
-                  <div className="svc-card-features">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="svc-card-feature">
-                        <div className="svc-card-feature-dot" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-                  <Link href="/contact">
+                  {/* <Link href="/contact">
                     <button className="svc-card-btn">Learn More</button>
-                  </Link>
+                  </Link> */}
                 </motion.div>
               ))}
             </div>

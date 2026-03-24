@@ -33,11 +33,14 @@ export default function Footer() {
             <div>
               <h3 className="footer-heading">Services</h3>
               <ul className="footer-list">
-                <li><Link href="/our-service" className="footer-link">3D Modeling</Link></li>
-                <li><Link href="/our-service" className="footer-link">Product Visualization</Link></li>
-                <li><Link href="/our-service" className="footer-link">Game Assets</Link></li>
-                <li><Link href="/our-service" className="footer-link">Architectural Models</Link></li>
-                <li><Link href="/our-service" className="footer-link">AR/VR Solutions</Link></li>
+                <li><Link href="/our-service" className="footer-link">Low-Poly 3D Models
+                </Link></li>
+                <li><Link href="/our-service" className="footer-link">3D Scan-Clean Ups
+                </Link></li>
+                <li><Link href="/our-service" className="footer-link">3D Fashion Models
+                </Link></li>
+                <li><Link href="/our-service" className="footer-link">Render Ready 3D Models
+                </Link></li>
               </ul>
             </div>
 
@@ -59,15 +62,15 @@ export default function Footer() {
               <ul className="footer-contact-list">
                 <li className="footer-contact-item">
                   <Mail className="footer-contact-icon" />
-                  <a href="mailto:hello@zentroid.com" className="footer-link">hello@zentroid.com</a>
+                  <a href="mailto:shaguna@zentroid.com" className="footer-link">shaguna@zentroid.com</a>
                 </li>
-                <li className="footer-contact-item">
+                {/* <li className="footer-contact-item">
                   <Phone className="footer-contact-icon" />
                   <a href="tel:+1234567890" className="footer-link">+1 (234) 567-890</a>
-                </li>
+                </li> */}
                 <li className="footer-contact-item">
                   <MapPin className="footer-contact-icon" />
-                  <span>123 Creative Street<br />San Francisco, CA 94103</span>
+                  <span>Zentroid Studios Pvt. Ltd., S.A, S Infotech, World Tech 67, Sahibzada Ajit Singh Nagar, Punjab 160062</span>
                 </li>
               </ul>
             </div>
@@ -76,7 +79,7 @@ export default function Footer() {
           {/* Bottom Bar */}
           <div className="footer-bottom">
             <div className="footer-bottom-inner">
-              <p className="footer-copy">© 2026 Zentroid. All rights reserved.</p>
+              <p className="footer-copy">© 2026 Zentroid Studios Pvt Ltd.</p>
               <div className="footer-bottom-links">
                 <a href="#" className="footer-bottom-link">Privacy Policy</a>
                 <a href="#" className="footer-bottom-link">Terms of Service</a>
