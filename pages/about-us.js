@@ -25,10 +25,15 @@ export default function AboutUs() {
   return (
     <>
       <Head>
-        <title>About Us - Zentroid Studios Pvt Ltd</title>
-        <meta name="description" content="From Every Angle,In Every Reality. 3D That Feels Real." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <title>About Us - Zentroid Studios Pvt Ltd</title>
+        <meta name="description" content="About Us Zentroid Studios Private Limited is a Chandigarh-based 3D company. We deliver exceptional 3D models, scan clean-ups, and fashion visualizations" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://zentroid.com/about-us" />
+        <meta property="og:url" content="https://zentroid.com/about-us" />
+        <meta property="og:title" content="About Us - Zentroid Studios Pvt Ltd" />
+        <meta property="og:description" content="About Us Zentroid Studios Private Limited is a Chandigarh-based 3D company. We deliver exceptional 3D models, scan clean-ups, and fashion visualizations" />
+        <meta property="og:image" content="https://zentroid.com/socials/social-icon.jpg" />
       </Head>
       <Layout>
 

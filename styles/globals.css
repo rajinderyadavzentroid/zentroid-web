@@ -64,11 +64,11 @@ body {
 }
 
 .nav-link:hover {
-    color: #fff200;
+    color: #fff200 !important;
 }
 
 .nav-link-active {
-    color: #fff200;
+    color: #fff200 !important;
 }
 
 .header-cta-btn {

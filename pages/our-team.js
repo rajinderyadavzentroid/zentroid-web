@@ -57,10 +57,15 @@ export default function OurTeam() {
   return (
     <>
       <Head>
-        <title>Our Team - Zentroid Studios Pvt Ltd</title>
-        <meta name="description" content="From Every Angle,In Every Reality. 3D That Feels Real." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <title>Our Team - Zentroid Studios Pvt Ltd</title>
+        <meta name="description" content="Our Team Founder Shaguna Khetarpal Driven by curiosity and an entrepreneurial spirit, I founded Zentroid Studios after years in sales, HR, and the 3D industry." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://zentroid.com/our-team" />
+        <meta property="og:url" content="https://zentroid.com/our-team" />
+        <meta property="og:title" content="Our Team - Zentroid Studios Pvt Ltd" />
+        <meta property="og:description" content="Our Team Founder Shaguna Khetarpal Driven by curiosity and an entrepreneurial spirit, I founded Zentroid Studios after years in sales, HR, and the 3D industry." />
+        <meta property="og:image" content="https://zentroid.com/socials/social-icon.jpg" />
       </Head>
       <Layout>
 
@@ -85,7 +90,7 @@ export default function OurTeam() {
 
               {/* Left Social Icons */}
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }} viewport={{ once: true }} className="founder-side-socials">
-                <motion.a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQGUGbFVomdF5AAAAZ0F1qPwvNCTWZuhykCOW8dn1Wvr5ob-tCHN3UjKT48ClndU2EXaVOk567JYEzMbzxfil2KXdb_md0YYkRC9SeOthtbrGxDzHbs7SUSzgGpaAPut1yPu4T4=&original_referer=https://zentroid.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fshagunakhetarpal%2F"  whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
+                <motion.a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQGUGbFVomdF5AAAAZ0F1qPwvNCTWZuhykCOW8dn1Wvr5ob-tCHN3UjKT48ClndU2EXaVOk567JYEzMbzxfil2KXdb_md0YYkRC9SeOthtbrGxDzHbs7SUSzgGpaAPut1yPu4T4=&original_referer=https://zentroid.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fshagunakhetarpal%2F" whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">
                   <Linkedin className="founder-side-social-icon" />
                 </motion.a>
                 <motion.a href="https://www.instagram.com/shaguna_khetarpal" whileHover={{ scale: 1.1, x: 5 }} className="founder-side-social-btn">

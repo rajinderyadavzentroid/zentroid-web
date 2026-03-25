@@ -51,10 +51,15 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>Contact - Zentroid Studios Pvt Ltd</title>
-        <meta name="description" content="From Every Angle,In Every Reality. 3D That Feels Real." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <title>Contact - Zentroid Studios Pvt Ltd</title>
+        <meta name="description" content="Get in Touch Let's Talk Schedule time with us Follow Us Behind the scenes Join Community Insights, updates Send us a message." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://zentroid.com/contact" />
+        <meta property="og:url" content="https://zentroid.com/contact" />
+        <meta property="og:title" content="Contact - Zentroid Studios Pvt Ltd" />
+        <meta property="og:description" content="Get in Touch Let's Talk Schedule time with us Follow Us Behind the scenes Join Community Insights, updates Send us a message." />
+        <meta property="og:image" content="https://zentroid.com/socials/social-icon.jpg" />
       </Head>
       <Layout>
 

@@ -50,10 +50,15 @@ export default function OurServices() {
   return (
     <>
       <Head>
-        <title>Service - Zentroid Studios Pvt Ltd</title>
-        <meta name="description" content="From Every Angle,In Every Reality. 3D That Feels Real." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <title>Our services - Zentroid Studios Pvt Ltd</title>
+        <meta name="description" content="Our Services Catering end-to-end 3D Modeling and Rendering for various industries matching the diverse use cases What truly sets us apart? Experience: Over" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://zentroid.com/our-services" />
+        <meta property="og:url" content="https://zentroid.com/our-services" />
+        <meta property="og:title" content="Our services - Zentroid Studios Pvt Ltd" />
+        <meta property="og:description" content="Our Services Catering end-to-end 3D Modeling and Rendering for various industries matching the diverse use cases What truly sets us apart? Experience: Over" />
+        <meta property="og:image" content="https://zentroid.com/socials/social-icon.jpg" />
       </Head>
       <Layout>
 

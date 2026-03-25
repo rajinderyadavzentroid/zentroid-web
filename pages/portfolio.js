@@ -31,10 +31,15 @@ export default function Portfolio() {
   return (
     <>
       <Head>
-        <title>Portfolio - Zentroid Studios Pvt Ltd</title>
-        <meta name="description" content="From Every Angle,In Every Reality. 3D That Feels Real." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <title>Portfolio - Zentroid Studios Pvt Ltd</title>
+        <meta name="description" content="Our Portfolio Designs Crafted with Detail Purpose Furniture Gaming Chair NoaiChairGaming chair+3 more Eyewear Kuboraum J9 Sun NoaiKuboraumSunglasses+6" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://zentroid.com/portfolio" />
+        <meta property="og:url" content="https://zentroid.com/portfolio" />
+        <meta property="og:title" content="Portfolio - Zentroid Studios Pvt Ltd" />
+        <meta property="og:description" content="Our Portfolio Designs Crafted with Detail Purpose Furniture Gaming Chair NoaiChairGaming chair+3 more Eyewear Kuboraum J9 Sun NoaiKuboraumSunglasses+6" />
+        <meta property="og:image" content="https://zentroid.com/socials/social-icon.jpg" />
       </Head>
       <Layout>
 

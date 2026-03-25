@@ -9,10 +9,15 @@ export default function PrivacyPolicy() {
   return (
     <>
       <Head>
-        <title>Privacy Policy - Zentroid Studios Pvt Ltd</title>
-        <meta name="description" content="From Every Angle,In Every Reality. 3D That Feels Real." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <title>Privacy Policy - Zentroid Studios Pvt Ltd</title>
+        <meta name="description" content="Privacy Policy Last Updated: 28th August 2025 We values your privacy. This Privacy Policy explains how we collect, use, and protect your information when you." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://zentroid.com/privacy-policy" />
+        <meta property="og:url" content="https://zentroid.com/privacy-policy" />
+        <meta property="og:title" content="Privacy Policy - Zentroid Studios Pvt Ltd" />
+        <meta property="og:description" content="Privacy Policy Last Updated: 28th August 2025 We values your privacy. This Privacy Policy explains how we collect, use, and protect your information when you." />
+        <meta property="og:image" content="https://zentroid.com/socials/social-icon.jpg" />
       </Head>
       <Layout>
 
