@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Container } from "react-bootstrap";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Favicon from "../src/images/favicon.ico";
 
 const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), { ssr: false });
 const ModelThumb = dynamic(() => import("@/src/component/ModelViewer").then(m => ({ default: m.ModelThumb })), { ssr: false });
@@ -153,7 +155,7 @@ export default function Home() {
                           <div className="hero-img-bar-title">Professional 3D Solutions</div>
                           <div className="hero-img-bar-sub">Bringing your vision to reality</div>
                         </div>
-                        <div className="hero-img-bar-logo">Z</div>
+                        <div className="hero-img-bar-logo"><Image src={Favicon} alt="Zentroid Logo" width={120} height={40} /></div>
                       </div>
                     </motion.div>
                   </div>
