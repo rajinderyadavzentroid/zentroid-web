@@ -5,6 +5,7 @@ import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Box, Package, Gamepad2
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Container } from "react-bootstrap";
+import { useRouter } from "next/navigation";
 
 const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), { ssr: false });
 const ModelThumb = dynamic(() => import("@/src/component/ModelViewer").then(m => ({ default: m.ModelThumb })), { ssr: false });
@@ -39,12 +40,9 @@ export default function Home() {
   ];
 
   const portfolio = [
-    { id: 1, title: "Modern Furniture Collection", category: "Product Design", image: "https://images.unsplash.com/photo-1720970228640-ac22842d782a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 2, title: "Futuristic Vehicle Concept", category: "Automotive", image: "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 3, title: "Luxury Watch Render", category: "Jewelry & Accessories", image: "https://images.unsplash.com/photo-1670177257750-9b47927f68eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 4, title: "Sci-Fi Environment", category: "Game Assets", image: "https://images.unsplash.com/photo-1726201726432-d8725c9acacd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 5, title: "Sneaker Product Visualization", category: "Fashion", image: "https://images.unsplash.com/photo-1728724794795-681832a6afd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
-    { id: 6, title: "Corporate Building", category: "Architecture", image: "https://images.unsplash.com/photo-1715156153744-d5fd2f1f66eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080" },
+    { id: 1, title: "Gaming Chair", category: "Furniture", image: "https://cdnb.artstation.com/p/assets/covers/images/090/414/647/smaller_square/zentroid-studios-zentroid-studios-02-3.jpg?1753857614", description: "High-fidelity gaming chair product render", link: "https://www.artstation.com/artwork/ZlEXw8" },
+    { id: 2, title: "Kuboraum J9 Sun", category: "Eyewear", image: "https://cdnb.artstation.com/p/assets/covers/images/090/022/269/smaller_square/zentroid-studios-zentroid-studios-seq0677.jpg?1752658538", description: "Luxury eyewear 3D visualization", link: "https://www.artstation.com/artwork/8BVGKO" },
+    { id: 3, title: "Nike Air DT Max 96 Colorado Away Sneakers", category: "Shoes", image: "https://cdnb.artstation.com/p/assets/covers/images/089/986/675/smaller_square/zentroid-studios-zentroid-studios-1-1.jpg?1752557011", description: "Photorealistic sneaker product render", link: "https://www.artstation.com/artwork/RKWWoX" },
   ];
 
   const testimonials = [
@@ -75,6 +73,8 @@ export default function Home() {
   const handleNext = () => setSelectedModel((prev) => (prev + 1) % models.length);
   const handlePrev = () => setSelectedModel((prev) => (prev - 1 + models.length) % models.length);
 
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -103,27 +103,69 @@ export default function Home() {
             <motion.div className="hero-shape hero-shape-3" animate={{ y: [0, -40, 0], rotate: [0, 180, 360] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }} />
           </div>
           <Container>
-            <div className="hero-content">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="hero-badge">
-                <Sparkles className="hero-badge-icon" />
-                <span className="hero-badge-text">Professional 3D Modeling Services</span>
-              </motion.div>
-              <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="hero-title">
-                <span className="hero-title-white">High-Quality 3D Models</span>
-                <br />
-                <span className="hero-title-yellow">That Bring Ideas to Life</span>
-              </motion.h1>
-              <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="hero-desc">
-                Transform your vision into stunning 3D reality. We create premium models for games, products, architecture, and immersive experiences.
-              </motion.p>
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="hero-btns">
-                <button className="hero-btn-primary"><span className="hero-btn-inner">View Portfolio <ArrowRight className="hero-btn-icon" /></span></button>
-                <button className="hero-btn-secondary"><span className="hero-btn-inner">Start a Project <ArrowRight className="hero-btn-icon" /></span></button>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="hero-stats">
-                <div><div className="hero-stat-number">500+</div><div className="hero-stat-label">Projects Completed</div></div>
-                <div><div className="hero-stat-number">100+</div><div className="hero-stat-label">Happy Clients</div></div>
-                <div><div className="hero-stat-number">5 Years</div><div className="hero-stat-label">Experience</div></div>
+            <div className="hero-grid">
+              {/* Left Side */}
+              <div className="hero-left">
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="hero-badge">
+                  <Sparkles className="hero-badge-icon" />
+                  <span className="hero-badge-text">Professional 3D Modeling Services</span>
+                </motion.div>
+                <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="hero-title">
+                  <span className="hero-title-white">High-Quality 3D Models</span>
+                  <br />
+                  <span className="hero-title-yellow">That Bring Ideas to Life</span>
+                </motion.h1>
+                <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="hero-desc">
+                  Transform your vision into stunning 3D reality. We create premium models for games, products, architecture, and immersive experiences.
+                </motion.p>
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="hero-btns">
+                  <button className="hero-btn-primary"><span className="hero-btn-inner">View Portfolio <ArrowRight className="hero-btn-icon" /></span></button>
+                  <button className="hero-btn-secondary"><span className="hero-btn-inner">Start a Project <ArrowRight className="hero-btn-icon" /></span></button>
+                </motion.div>
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="hero-stats">
+                  <div><div className="hero-stat-number">500+</div><div className="hero-stat-label">Projects Completed</div></div>
+                  <div><div className="hero-stat-number">100+</div><div className="hero-stat-label">Happy Clients</div></div>
+                  <div><div className="hero-stat-number">5 Years</div><div className="hero-stat-label">Experience</div></div>
+                </motion.div>
+              </div>
+
+              {/* Right Side */}
+              <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.4 }} className="hero-right">
+                <div className="hero-img-glow" />
+                <div className="hero-img-group">
+                  <div className="hero-img-corner hero-img-corner-tl" />
+                  <div className="hero-img-corner hero-img-corner-br" />
+                  <div className="hero-img-card">
+                    <div className="hero-img-overlay" />
+                    <div className="hero-img-wrap">
+                      <ModelViewer
+                        path="/models/north-face-base-camp-rolling.glb"
+                        scale={10}
+                        position={[0, -0.6, 0]}
+                        cameraPosition={[0, 1, 8]}
+                        fov={20}
+                        enableZoom={false}
+                      />
+                    </div>
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1 }} className="hero-img-bar">
+                      <div className="hero-img-bar-inner">
+                        <div>
+                          <div className="hero-img-bar-title">Professional 3D Solutions</div>
+                          <div className="hero-img-bar-sub">Bringing your vision to reality</div>
+                        </div>
+                        <div className="hero-img-bar-logo">Z</div>
+                      </div>
+                    </motion.div>
+                  </div>
+                  <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 1.2 }} className="hero-float-card hero-float-card-left">
+                    <div className="hero-float-value">98%</div>
+                    <div className="hero-float-label">Success Rate</div>
+                  </motion.div>
+                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 1.4 }} className="hero-float-card hero-float-card-right">
+                    <div className="hero-float-value">24/7</div>
+                    <div className="hero-float-label">Support</div>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
           </Container>
@@ -222,10 +264,10 @@ export default function Home() {
               </button>
             </motion.div>
           </Container>
-        </section>
+        </section >
 
         {/* Portfolio Section */}
-        <section className="portfolio-section">
+        < section className="portfolio-section" >
           <Container>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="portfolio-header">
               <span className="portfolio-label">OUR WORK</span>
@@ -243,7 +285,7 @@ export default function Home() {
                       <div className="portfolio-overlay-content">
                         <span className="portfolio-cat-badge">{project.category}</span>
                         <h3 className="portfolio-card-title">{project.title}</h3>
-                        <button className="portfolio-view-btn">View Project <ArrowRight className="portfolio-view-icon" /></button>
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="portfolio-view-btn">View Project <ArrowRight className="portfolio-view-icon" /></a>
                       </div>
                     </div>
                     <div className="portfolio-cat-tag">{project.category}</div>
@@ -252,17 +294,17 @@ export default function Home() {
               ))}
             </div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.6 }} className="portfolio-cta">
-              <button className="services-cta-btn">
+              <button className="services-cta-btn" onClick={() => router.push("/portfolio")}>
                 <span className="services-cta-inner">View Full Portfolio <ArrowRight className="services-cta-icon" /></span>
               </button>
             </motion.div>
           </Container>
-        </section>
+        </section >
 
 
 
         {/* Testimonials Section */}
-        <section className="testimonials-section">
+        < section className="testimonials-section" >
           <Container>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="testimonials-header">
               <span className="testimonials-label">TESTIMONIALS</span>
@@ -304,11 +346,11 @@ export default function Home() {
               ))}
             </motion.div>
           </Container>
-        </section>
+        </section >
 
 
         {/* CTA Section */}
-        <section className="cta-section">
+        < section className="cta-section" >
           <div className="cta-bg">
             <motion.div className="cta-blob cta-blob-1" animate={{ scale: [1, 1.2, 1], x: [0, 100, 0], y: [0, 50, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} />
             <motion.div className="cta-blob cta-blob-2" animate={{ scale: [1, 1.3, 1], x: [0, -100, 0], y: [0, -50, 0] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }} />
@@ -355,9 +397,9 @@ export default function Home() {
             </motion.div>
           </div>
           <div className="cta-bottom-line" />
-        </section>
+        </section >
 
-      </Layout>
+      </Layout >
     </>
   );
 }

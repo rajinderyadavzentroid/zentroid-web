@@ -235,6 +235,25 @@
   .hero-btns {
     flex-direction: row;
   }
+
+  .hero-left {
+    text-align: left;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+
+  .hero-float-card {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 5rem;
+  }
 }
 
 @media (min-width: 1024px) {

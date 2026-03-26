@@ -558,6 +558,180 @@ body {
     border-radius: 9999px;
 }
 
+/* Hero Two-Column Layout */
+.hero-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    padding: 5rem 0;
+}
+
+.hero-left {
+    text-align: center;
+}
+
+.hero-right {
+    position: relative;
+}
+
+.hero-img-glow {
+    position: absolute;
+    inset: -1rem;
+    background: linear-gradient(to right, rgba(255, 242, 0, 0.2), rgba(255, 242, 0, 0.1), transparent);
+    border-radius: 1.5rem;
+    filter: blur(24px);
+    opacity: 0.6;
+}
+
+.hero-img-group {
+    position: relative;
+}
+
+.hero-img-corner {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.hero-img-group:hover .hero-img-corner {
+    opacity: 1;
+}
+
+.hero-img-corner-tl {
+    top: -1rem;
+    left: -1rem;
+    border-top: 4px solid #fff200;
+    border-left: 4px solid #fff200;
+    border-radius: 1.5rem 0 0 0;
+}
+
+.hero-img-corner-br {
+    bottom: -1rem;
+    right: -1rem;
+    border-bottom: 4px solid #fff200;
+    border-right: 4px solid #fff200;
+    border-radius: 0 0 1.5rem 0;
+}
+
+.hero-img-card {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 2px solid rgba(255, 242, 0, 0.3);
+    box-shadow: 0 25px 50px rgba(255, 242, 0, 0.1);
+    transition: border-color 0.5s;
+}
+
+.hero-img-group:hover .hero-img-card {
+    border-color: rgba(255, 242, 0, 0.5);
+}
+
+.hero-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 242, 0, 0.1), transparent, rgba(26, 26, 26, 0.2));
+    z-index: 10;
+    pointer-events: none;
+}
+
+.hero-img-wrap {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    min-height: 450px;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s;
+}
+
+.hero-img-group:hover .hero-img {
+    transform: scale(1.1);
+}
+
+.hero-img-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem;
+    z-index: 20;
+}
+
+.hero-img-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-img-bar-title {
+    color: white;
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+}
+
+.hero-img-bar-sub {
+    color: #d1d5db;
+    font-size: 0.875rem;
+}
+
+.hero-img-bar-logo {
+    width: 3rem;
+    height: 3rem;
+    background-color: #fff200;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.hero-float-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 242, 0, 0.3);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: none;
+    position: absolute;
+}
+
+.hero-float-card-left {
+    left: -1.5rem;
+    top: 25%;
+}
+
+.hero-float-card-right {
+    right: -1.5rem;
+    bottom: 25%;
+}
+
+.hero-float-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff200;
+}
+
+.hero-float-label {
+    font-size: 0.75rem;
+    color: #d1d5db;
+    margin-top: 0.25rem;
+}
+
 /* Models Section */
 .models-section {
     background-color: #111111;
@@ -1267,6 +1441,7 @@ body {
     cursor: pointer;
     padding: 0;
     transition: gap 0.2s;
+    text-decoration: none;
 }
 
 .portfolio-view-btn:hover {
@@ -2249,6 +2424,7 @@ body {
     cursor: pointer;
     padding: 0;
     transition: color 0.2s;
+    text-decoration: none;
 }
 
 .pf-card-view-btn:hover {

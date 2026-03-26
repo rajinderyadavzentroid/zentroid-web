@@ -11,18 +11,29 @@ export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const projects = [
-    { id: 1, title: "Modern Tech Device", category: "Product Models", image: "https://images.unsplash.com/photo-1752134594148-11db6ad62ab8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "High-fidelity product render" },
-    { id: 2, title: "Futuristic Character", category: "Game Assets", image: "https://images.unsplash.com/photo-1758862493310-5e54994adf95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Game-ready character model" },
-    { id: 3, title: "Modern Building Design", category: "Architecture", image: "https://images.unsplash.com/photo-1760801802787-86f7958c439e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Architectural visualization" },
-    { id: 4, title: "Abstract Concept", category: "Concept Models", image: "https://images.unsplash.com/photo-1760563368624-31dc3aabd808?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Futuristic concept design" },
-    { id: 5, title: "Minimalist Product", category: "Product Models", image: "https://images.unsplash.com/photo-1658526064786-63d6e3603215?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Clean product visualization" },
-    { id: 6, title: "Fantasy Environment", category: "Game Assets", image: "https://images.unsplash.com/photo-1728198349686-c51f8899d2a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Game environment scene" },
-    { id: 7, title: "Colorful Shapes", category: "Concept Models", image: "https://images.unsplash.com/photo-1751644332113-2004a1b143f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Abstract 3D composition" },
-    { id: 8, title: "Interior Space", category: "Architecture", image: "https://images.unsplash.com/photo-1633449227338-45d2df8c37b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Modern interior design" },
-    { id: 9, title: "Tech Gadget", category: "Product Models", image: "https://images.unsplash.com/photo-1543493251-bc3e68468d1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", description: "Product photography style" },
+    { id: 1, title: "Gaming Chair", category: "Furniture", image: "https://cdnb.artstation.com/p/assets/covers/images/090/414/647/smaller_square/zentroid-studios-zentroid-studios-02-3.jpg?1753857614", description: "High-fidelity gaming chair product render", link: "https://www.artstation.com/artwork/ZlEXw8" },
+    { id: 2, title: "Kuboraum J9 Sun", category: "Eyewear", image: "https://cdnb.artstation.com/p/assets/covers/images/090/022/269/smaller_square/zentroid-studios-zentroid-studios-seq0677.jpg?1752658538", description: "Luxury eyewear 3D visualization", link: "https://www.artstation.com/artwork/8BVGKO" },
+    { id: 3, title: "Nike Air DT Max 96 Colorado Away Sneakers", category: "Shoes", image: "https://cdnb.artstation.com/p/assets/covers/images/089/986/675/smaller_square/zentroid-studios-zentroid-studios-1-1.jpg?1752557011", description: "Photorealistic sneaker product render", link: "https://www.artstation.com/artwork/RKWWoX" },
+    { id: 4, title: "Graham Fortress City GMT Red", category: "Watches", image: "https://cdnb.artstation.com/p/assets/covers/images/089/987/879/smaller_square/zentroid-studios-zentroid-studios-render-5.jpg?1752562296", description: "Premium luxury watch 3D render", link: "https://www.artstation.com/artwork/JrRR1v" },
+    { id: 7, title: "Alain Mikli A0 5066", category: "Eyewear", image: "https://cdnb.artstation.com/p/assets/covers/images/090/057/605/smaller_square/zentroid-studios-zentroid-studios-1-1.jpg?1752757225", description: "Designer eyewear product visualization", link: "https://www.artstation.com/artwork/YG2YeX" },
+    { id: 14, title: "Puma Speedcat OG Red Sneakers", category: "Shoes", image: "https://cdna.artstation.com/p/assets/covers/images/090/840/342/smaller_square/zentroid-studios-zentroid-studios-2-2.jpg?1755061505", description: "High-detail sneaker 3D model", link: "https://www.artstation.com/artwork/DL6N0G" },
+    { id: 18, title: "Onitsuka Tiger Mexico", category: "Shoes", image: "https://cdnb.artstation.com/p/assets/covers/images/090/777/353/smaller_square/zentroid-studios-zentroid-studios-3-1.jpg?1754891891", description: "Classic sneaker product render", link: "https://www.artstation.com/artwork/dyqy3Q" },
+    { id: 20, title: "Balmain Swan Sneakers", category: "Shoes", image: "https://cdna.artstation.com/p/assets/covers/images/090/414/792/smaller_square/zentroid-studios-zentroid-studios-04-5.jpg?1753858170", description: "Luxury fashion sneaker visualization", link: "https://www.artstation.com/artwork/L4yBok" },
+    { id: 17, title: "Arnette Fresa", category: "Eyewear", image: "https://cdna.artstation.com/p/assets/covers/images/089/963/786/smaller_square/zentroid-studios-zentroid-studios-preview-02-4.jpg?1752494930", description: "Stylish eyewear 3D product render", link: "https://www.artstation.com/artwork/x3PNQm" },
+    { id: 10, title: "Signature C de Cartier", category: "Eyewear", image: "https://cdnb.artstation.com/p/assets/covers/images/089/887/279/smaller_square/zentroid-studios-zentroid-studios-2.jpg?1752231088", description: "Iconic Cartier eyewear visualization", link: "https://www.artstation.com/artwork/Ez8O8A" },
+    { id: 5, title: "Bed", category: "Furniture", image: "https://cdnb.artstation.com/p/assets/covers/images/090/414/449/smaller_square/zentroid-studios-zentroid-studios-05-1.jpg?1753856942", description: "Detailed bedroom furniture render", link: "https://www.artstation.com/artwork/qJXYge" },
+    { id: 6, title: "DiorSignature S14F", category: "Eyewear", image: "https://cdna.artstation.com/p/assets/covers/images/089/859/288/smaller_square/zentroid-studios-zentroid-studios-thmnl.jpg?1752147566", description: "Elegant Dior eyewear 3D model", link: "https://www.artstation.com/artwork/6LVO20" },
+    { id: 15, title: "Prada Milano", category: "Eyewear", image: "https://cdnb.artstation.com/p/assets/covers/images/089/963/907/smaller_square/zentroid-studios-zentroid-studios-preview-03-4.jpg?1752495291", description: "Premium Prada eyewear visualization", link: "https://www.artstation.com/artwork/Ez82nA" },
+    { id: 11, title: "Givenchy GV 40030U", category: "Eyewear", image: "https://cdnb.artstation.com/p/assets/covers/images/089/991/831/smaller_square/zentroid-studios-zentroid-studios-01-1.jpg?1752574267", description: "High-end Givenchy eyewear render", link: "https://www.artstation.com/artwork/BkLl39" },
+    { id: 8, title: "Ferragamo Buckle Leather Loafers", category: "Shoes", image: "https://cdna.artstation.com/p/assets/covers/images/090/879/370/20250814053204/smaller_square/zentroid-studios-zentroid-studios-thumbnail.jpg?1755167524", description: "Luxury leather loafers product render", link: "https://www.artstation.com/artwork/zxY0gw" },
+    { id: 12, title: "Rayban Clubmaster Way", category: "Eyewear", image: "https://cdna.artstation.com/p/assets/covers/images/089/860/034/smaller_square/zentroid-studios-zentroid-studios-preview-02-3.jpg?1752149180", description: "Classic Ray-Ban eyewear 3D model", link: "https://www.artstation.com/artwork/qJnNkn" },
+    { id: 9, title: "Almirah", category: "Furniture", image: "https://cdnb.artstation.com/p/assets/covers/images/090/414/023/smaller_square/zentroid-studios-zentroid-studios-4-1.jpg?1753854959", description: "Detailed wardrobe furniture visualization", link: "https://www.artstation.com/artwork/V2v4ER" },
+    { id: 13, title: "Ray Ban Ferrari RB2217M", category: "Eyewear", image: "https://cdna.artstation.com/p/assets/covers/images/089/859/878/smaller_square/zentroid-studios-zentroid-studios-preview-03-2.jpg?1752148970", description: "Ray-Ban Ferrari edition eyewear render", link: "https://www.artstation.com/artwork/rlL2kO" },
+    { id: 16, title: "Persol 009", category: "Eyewear", image: "https://cdna.artstation.com/p/assets/covers/images/089/859/726/smaller_square/zentroid-studios-zentroid-studios-preview-1-1.jpg?1752148633", description: "Classic Persol eyewear 3D visualization", link: "https://www.artstation.com/artwork/y4eNY5" },
+    { id: 19, title: "BOSS Leather Boots", category: "Shoes", image: "https://cdna.artstation.com/p/assets/covers/images/090/415/450/20250730023446/smaller_square/zentroid-studios-zentroid-studios-05-5.jpg?1753860886", description: "Premium BOSS leather boots render", link: "https://www.artstation.com/artwork/QK6Bbl" },
   ];
 
-  const categories = ["All", "Product Models", "Game Assets", "Architecture", "Concept Models"];
+  const categories = ["All", "Furniture", "Eyewear", "Shoes", "Watches"];
 
   const filteredProjects = activeCategory === "All"
     ? projects
@@ -94,9 +105,9 @@ export default function Portfolio() {
                       <div className="pf-card-cat">{project.category}</div>
                       <h3 className="pf-card-title">{project.title}</h3>
                       <p className="pf-card-desc">{project.description}</p>
-                      <button className="pf-card-view-btn">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="pf-card-view-btn">
                         <ZoomIn className="pf-card-view-icon" /> View Details
-                      </button>
+                      </a>
                     </div>
                   </div>
                   <div className="pf-card-badge">{project.category}</div>

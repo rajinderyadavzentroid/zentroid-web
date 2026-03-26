@@ -60,7 +60,7 @@ export default function ModelViewer({
         <ContactShadows position={[0, position[1] - 1, 0]} opacity={0.4} scale={6} blur={2} />
       </Suspense>
       <OrbitControls
-        enableZoom={true}
+        enableZoom={false}
         enablePan={true}
         panSpeed={1.5}
         screenSpacePanning={true}
