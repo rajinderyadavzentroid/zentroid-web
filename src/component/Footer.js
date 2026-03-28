@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Linkedin, Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { Container } from "react-bootstrap";
 import Image from "next/image";
-import LogoMain from "../images/main-logo.png";
+import LogoMain from "../images/logo-white.png";
 
 
 export default function Footer() {

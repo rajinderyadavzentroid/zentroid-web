@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Menu, X } from "lucide-react";
 import { Container } from "react-bootstrap";
 import Image from "next/image";
-import LogoMain from "../images/main-logo.png";
+import LogoMain from "../images/logo-white.png";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

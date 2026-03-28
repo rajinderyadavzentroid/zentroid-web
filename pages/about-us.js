@@ -49,7 +49,7 @@ export default function AboutUs() {
                 We deliver exceptional 3D models, scan clean-ups, and fashion visualizations tailored to e-commerce and AR/VR applications.
               </p>
               <p className="about-hero-desc">
-                To date, we’ve delivered 5,000+ models and built a 30+ person team, reflecting our rapid growth and experience.
+                To date, we’ve delivered 11,000+ models and built a 50+ person team, reflecting our rapid growth and experience.
               </p>
             </motion.div>
           </Container>

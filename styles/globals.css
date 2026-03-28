@@ -2847,6 +2847,7 @@ body {
     color: #1a1a1a;
     margin-bottom: 0.75rem;
     font-size: 0.95rem;
+    margin-bottom: 0;
 }
 
 .team-card-bio {
@@ -2854,6 +2855,7 @@ body {
     color: #4b5563;
     line-height: 1.75;
     margin-bottom: 1rem;
+    margin-bottom: 0;
 }
 
 .team-card-socials {
