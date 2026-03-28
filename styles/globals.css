@@ -2832,11 +2832,11 @@ body {
 }
 
 .team-card-body {
-    padding: 1.5rem;
+    padding: 16px;
 }
 
 .team-card-name {
-    font-size: 1.5rem;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 0.25rem;
     color: #111827;
