@@ -13,6 +13,8 @@ const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), { ssr: 
 const ModelThumb = dynamic(() => import("@/src/component/ModelViewer").then(m => ({ default: m.ModelThumb })), { ssr: false });
 
 export default function Home() {
+  const router = useRouter();
+
 
   const models = [
     { id: 1, name: "Fendi Bag", category: "Fashion", glb: "/models/fendi-bag.glb", viewerProps: { scale: 10, position: [0, -0.9, 0], cameraPosition: [0, 1, 8], fov: 20 } },         // Replace: /models/model-2.glb
@@ -58,24 +60,35 @@ export default function Home() {
   const [calendlyReady, setCalendlyReady] = useState(false);
 
   useEffect(() => {
+    // Add Calendly CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://assets.calendly.com/assets/external/widget.css";
+    document.head.appendChild(link);
+
+    // Add Calendly JS
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     script.onload = () => setCalendlyReady(true);
     document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
+
+    return () => {
+      document.body.removeChild(script);
+      document.head.removeChild(link);
+    };
   }, []);
 
   const openCalendly = () => {
     if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: "https://calendly.com/your-username" });
+      window.Calendly.initPopupWidget({ url: "https://calendly.com/shaguna_zentroid/30min" });
     }
   };
+
 
   const handleNext = () => setSelectedModel((prev) => (prev + 1) % models.length);
   const handlePrev = () => setSelectedModel((prev) => (prev - 1 + models.length) % models.length);
 
-  const router = useRouter();
 
   return (
     <>
@@ -121,8 +134,8 @@ export default function Home() {
                   Transform your vision into stunning 3D reality. We create premium models for games, products, architecture, and immersive experiences.
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="hero-btns">
-                  <button className="hero-btn-primary"><span className="hero-btn-inner">View Portfolio <ArrowRight className="hero-btn-icon" /></span></button>
-                  <button className="hero-btn-secondary"><span className="hero-btn-inner">Start a Project <ArrowRight className="hero-btn-icon" /></span></button>
+                  <button className="hero-btn-primary"><span className="hero-btn-inner" onClick={() => router.push("/portfolio")}>View Portfolio <ArrowRight className="hero-btn-icon" /></span></button>
+                  <button className="hero-btn-secondary"><span className="hero-btn-inner" onClick={() => router.push("/contact")}>Start a Project <ArrowRight className="hero-btn-icon" /></span></button>
                 </motion.div>
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="hero-stats">
                   <div><div className="hero-stat-number">500+</div><div className="hero-stat-label">Projects Completed</div></div>
@@ -260,11 +273,11 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="services-cta">
+            {/* <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="services-cta">
               <button className="services-cta-btn">
                 <span className="services-cta-inner">View All Services <ArrowRight className="services-cta-icon" /></span>
               </button>
-            </motion.div>
+            </motion.div> */}
           </Container>
         </section >
 
@@ -374,7 +387,7 @@ export default function Home() {
               </h2>
               <p className="cta-desc">Let's discuss your project and create stunning 3D models that exceed expectations</p>
               <div className="cta-btns">
-                <button className="cta-btn-primary">
+                <button className="cta-btn-primary" onClick={() => router.push("/contact")}>
                   <span className="cta-btn-inner"><Mail className="cta-btn-icon" /> Start Your Project <ArrowRight className="cta-btn-arrow" /></span>
                 </button>
                 <button className="cta-btn-secondary" onClick={openCalendly} disabled={!calendlyReady}>

@@ -11,19 +11,31 @@ export default function Contact() {
   const [calendlyReady, setCalendlyReady] = useState(false);
 
   useEffect(() => {
+    // Add Calendly CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://assets.calendly.com/assets/external/widget.css";
+    document.head.appendChild(link);
+
+    // Add Calendly JS
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     script.onload = () => setCalendlyReady(true);
     document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
+
+    return () => {
+      document.body.removeChild(script);
+      document.head.removeChild(link);
+    };
   }, []);
 
   const openCalendly = () => {
     if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: "https://calendly.com/your-username" });
+      window.Calendly.initPopupWidget({ url: "https://calendly.com/shaguna_zentroid/30min" });
     }
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
