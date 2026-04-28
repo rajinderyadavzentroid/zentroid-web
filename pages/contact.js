@@ -8,6 +8,8 @@ import { Container } from "react-bootstrap";
 export default function Contact() {
 
   const [formData, setFormData] = useState({ name: "", email: "", projectDetails: "" });
+  const [status, setStatus] = useState("");
+  const [errors, setErrors] = useState({});
   const [calendlyReady, setCalendlyReady] = useState(false);
 
   useEffect(() => {
@@ -36,16 +38,51 @@ export default function Contact() {
     }
   };
 
+  const validate = () => {
+    const errs = {};
+    if (!formData.name.trim() || formData.name.trim().length < 2) errs.name = "Name must be at least 2 characters.";
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = "Please enter a valid email address.";
+    return errs;
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you! We'll get back to you soon.");
-    setFormData({ name: "", email: "", projectDetails: "" });
+    const errs = validate();
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setErrors({});
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.projectDetails,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", projectDetails: "" });
+        setTimeout(() => setStatus(""), 5000);
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (errors[name]) {
+      const updated = { ...errors };
+      if (name === "name" && value.trim().length >= 2) delete updated.name;
+      if (name === "email" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) delete updated.email;
+      setErrors(updated);
+    }
   };
 
   const contactInfo = [
@@ -96,19 +133,25 @@ export default function Contact() {
                   <h2 className="contact-card-title">Send Us a Message</h2>
                   <form onSubmit={handleSubmit} className="contact-form">
                     <div className="contact-field">
-                      <label htmlFor="name" className="contact-label">Your Name</label>
-                      <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="contact-input" placeholder="John Doe" />
+                      <label htmlFor="name" className="contact-label">Your Name <span style={{ color: "red" }}>*</span></label>
+                      <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="contact-input" placeholder="John Doe" />
+                      {errors.name && <p style={{ color: "red", fontSize: "0.85rem", marginTop: "4px" }}>{errors.name}</p>}
                     </div>
                     <div className="contact-field">
-                      <label htmlFor="email" className="contact-label">Email Address</label>
-                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="contact-input" placeholder="john@example.com" />
+                      <label htmlFor="email" className="contact-label">Email Address <span style={{ color: "red" }}>*</span></label>
+                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="contact-input" placeholder="john@example.com" />
+                      {errors.email && <p style={{ color: "red", fontSize: "0.85rem", marginTop: "4px" }}>{errors.email}</p>}
                     </div>
                     <div className="contact-field">
                       <label htmlFor="projectDetails" className="contact-label">Project Details</label>
                       <textarea id="projectDetails" name="projectDetails" value={formData.projectDetails} onChange={handleChange} required rows={6} className="contact-textarea" placeholder="Tell us about your project..." />
                     </div>
-                    <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="contact-submit-btn">
-                      <Send className="contact-submit-icon" /> Send Message
+                    {status === "success" && (
+                      <p style={{ color: "green" }}>Message sent successfully! Our team will contact you shortly.</p>
+                    )}
+                    {status === "error" && <p style={{ color: "red" }}>There is some issue, please try after some time.</p>}
+                    <motion.button type="submit" disabled={status === "sending"} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="contact-submit-btn">
+                      <Send className="contact-submit-icon" /> {status === "sending" ? "Sending..." : "Send Message"}
                     </motion.button>
                   </form>
                 </div>
