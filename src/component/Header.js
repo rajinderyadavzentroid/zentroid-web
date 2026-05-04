@@ -37,7 +37,7 @@ export default function Header() {
 
   const openCalendly = () => {
     if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: "https://calendly.com/shaguna_zentroid/30min" });
+      window.Calendly.initPopupWidget({ url: "https://calendly.com/shaguna-zentroid/30min" });
     }
   };
 

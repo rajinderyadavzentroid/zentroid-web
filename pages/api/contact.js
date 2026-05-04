@@ -20,8 +20,8 @@ export default async function handler(req, res) {
   try {
     await transporter.sendMail({
       from: `"${name}" <${process.env.SMTP_USER}>`,
-      // to: "rajinder@zentroid.com",
-      to: `"${email}"`,
+      to: "rajinder@zentroid.com",
+      // to: `"${email}"`,
       subject: `New Contact Form Submission from ${name}`,
       html: `
       <div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden">
