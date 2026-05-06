@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 <div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;border:1px solid E0E0E0_1;border-radius:8px;overflow:hidden">
 <!-- Header -->
 <div style="background:#0f0f0f;padding:24px 32px;text-align:center;border-bottom:3px solid 6C63FF_1">
-<img src="https://i.ibb.co/C3GYFQh6/logo-white.png" alt="Zentroid Studios" border="0" style="max-height:48px" />
+<img src="https://i.postimg.cc/NjcjPjPv/logo-white.png" alt="Zentroid Studios" border="0" style="max-height:48px" />
 </div>
 <!-- Body -->
 <div style="padding:32px;background:#ffffff">
