@@ -1,70 +1,55 @@
-import { Suspense, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, OrbitControls, Environment, ContactShadows, Clone } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF, Bounds } from "@react-three/drei";
+import { Suspense, memo } from "react";
 
-function Model({ path, scale, position, isInteracting }) {
+function Model({ path, scale, position }) {
   const { scene } = useGLTF(path);
-  const ref = useRef();
-  useFrame((_, delta) => {
-    if (ref.current && !isInteracting) ref.current.rotation.y += delta * 0.4;
-  });
-  return <Clone ref={ref} object={scene} scale={scale} position={position} />;
-}
 
-function ThumbModel({ path, scale, position }) {
-  const { scene } = useGLTF(path);
-  const ref = useRef();
-  useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.y += delta * 0.6;
-  });
-  return <Clone ref={ref} object={scene} scale={scale} position={position} />;
-}
-
-export function ModelThumb({ path, scale = 3, position = [0, 0, 0], cameraPosition = [0, 1, 3], fov = 55 }) {
   return (
-    <Canvas
-      camera={{ position: cameraPosition, fov: fov }}
-      style={{ width: "100%", height: "100%", background: "transparent" }}
-    >
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <Suspense fallback={null}>
-        <ThumbModel path={path} scale={scale} position={position} />
-        <Environment preset="city" />
-      </Suspense>
-    </Canvas>
+    <primitive
+      object={scene}
+      scale={scale}
+      position={position}
+      dispose={null}
+    />
   );
 }
 
-export default function ModelViewer({
+function ModelViewer({
   path,
-  scale = 3,
+  scale = 1,
   position = [0, 0, 0],
-  cameraPosition = [0, 1, 3],
-  fov = 55,
+  cameraPosition = [0, 1, 8],
+  fov = 25,
+  enableZoom = true,
 }) {
-  const [isInteracting, setIsInteracting] = useState(false);
   return (
     <Canvas
-      camera={{ position: cameraPosition, fov: fov }}
-      style={{ width: "100%", height: "100%", background: "transparent", cursor: "grab" }}
-      onPointerDown={() => setIsInteracting(true)}
-      onPointerUp={() => setIsInteracting(false)}
-      onPointerLeave={() => setIsInteracting(false)}
+      frameloop="demand"
+      dpr={[1, 1.5]}
+      camera={{ position: cameraPosition, fov }}
+      gl={{
+        antialias: false,
+        powerPreference: "high-performance",
+      }}
     >
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <ambientLight intensity={1.2} />
+      <directionalLight position={[5, 5, 5]} intensity={1.5} />
+
       <Suspense fallback={null}>
-        <Model path={path} scale={scale} position={position} isInteracting={isInteracting} />
-        <Environment preset="city" />
-        <ContactShadows position={[0, position[1] - 1, 0]} opacity={0.4} scale={6} blur={2} />
+        <Bounds fit clip observe margin={1.2}>
+          <Model path={path} scale={scale} position={position} />
+        </Bounds>
       </Suspense>
+
       <OrbitControls
-        enableZoom={false}
-        enablePan={true}
-        panSpeed={1.5}
-        screenSpacePanning={true}
+        enableZoom={enableZoom}
+        enablePan={false}
+        autoRotate
+        autoRotateSpeed={0.8}
       />
     </Canvas>
   );
 }
+
+export default memo(ModelViewer);
