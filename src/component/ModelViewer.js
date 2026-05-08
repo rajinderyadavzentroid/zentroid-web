@@ -49,31 +49,16 @@ function ModelViewer({
   fov = 25,
   enableZoom = true,
 }) {
-  const [webglAllowed, setWebglAllowed] = useState(true);
+  const [webglError, setWebglError] = useState(false);
 
-  useEffect(() => {
-    const isMobile =
-      typeof window !== "undefined" &&
-      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    const lowMemory =
-      typeof navigator !== "undefined" &&
-      navigator.deviceMemory &&
-      navigator.deviceMemory <= 3;
-
-    if (isMobile && lowMemory) {
-      setWebglAllowed(false);
-    }
-  }, []);
-
-  if (!webglAllowed) {
+  if (webglError) {
     return <ZentroidLoader />;
   }
 
   return (
     <div className="model-viewer-safe">
       <Canvas
-        frameloop="demand"
+        frameloop="always"
         dpr={[1, 1.25]}
         camera={{ position: cameraPosition, fov }}
         gl={{
@@ -81,6 +66,12 @@ function ModelViewer({
           alpha: true,
           powerPreference: "high-performance",
           preserveDrawingBuffer: false,
+        }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener("webglcontextlost", (event) => {
+            event.preventDefault();
+            setWebglError(true);
+          });
         }}
       >
         <ambientLight intensity={1.2} />

@@ -22,11 +22,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Favicon from "../src/images/favicon.ico";
 
-const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), {
-  ssr: false,
-  loading: () => <ZentroidPageLoader />,
-});
-
 function ZentroidPageLoader() {
   return (
     <div className="zentroid-loader">
@@ -36,6 +31,11 @@ function ZentroidPageLoader() {
     </div>
   );
 }
+
+const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), {
+  ssr: false,
+  loading: () => <ZentroidPageLoader />,
+});
 
 function LazyModelViewer(props) {
   const ref = useRef(null);
@@ -51,11 +51,10 @@ function LazyModelViewer(props) {
           observer.disconnect();
         }
       },
-      { rootMargin: "180px" }
+      { rootMargin: "200px" }
     );
 
     observer.observe(ref.current);
-
     return () => observer.disconnect();
   }, []);
 
@@ -360,7 +359,7 @@ export default function Home() {
               <div className="hero-right">
                 <div className="hero-img-card">
                   <div className="hero-img-wrap">
-                    <LazyModelViewer
+                    <ModelViewer
                       path="/models/north-face-base-camp-rolling.glb"
                       scale={10}
                       position={[0, -0.6, 0]}
