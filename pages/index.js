@@ -18,14 +18,24 @@ import {
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { Container } from "react-bootstrap";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Favicon from "../src/images/favicon.ico";
 
 const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), {
   ssr: false,
-  loading: () => <div className="model-loader">Loading 3D...</div>,
+  loading: () => <ZentroidPageLoader />,
 });
+
+function ZentroidPageLoader() {
+  return (
+    <div className="zentroid-loader">
+      <div className="zentroid-loader-ring" />
+      <div className="zentroid-loader-text">Zentroid Studios</div>
+      {/* <div className="zentroid-loader-sub">Loading 3D model...</div> */}
+    </div>
+  );
+}
 
 function LazyModelViewer(props) {
   const ref = useRef(null);
@@ -41,24 +51,23 @@ function LazyModelViewer(props) {
           observer.disconnect();
         }
       },
-      { rootMargin: "250px" }
+      { rootMargin: "180px" }
     );
 
     observer.observe(ref.current);
+
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={ref} style={{ width: "100%", height: "100%" }}>
-      {visible ? <ModelViewer {...props} /> : <div className="model-loader">3D Preview</div>}
+    <div ref={ref} className="lazy-model-wrap">
+      {visible ? <ModelViewer {...props} /> : <ZentroidPageLoader />}
     </div>
   );
 }
 
 export default function Home() {
   const router = useRouter();
-
-  console.log('live test');
 
   const models = [
     {
@@ -142,10 +151,30 @@ export default function Home() {
   ];
 
   const services = [
-    { title: "3D Modeling", description: "High-quality 3D models for any industry.", icon: Box },
-    { title: "Product Visualization", description: "Stunning product renders.", icon: Package },
-    { title: "Game Assets", description: "Optimized game-ready assets.", icon: Gamepad2 },
-    { title: "Architectural Models", description: "Detailed architectural visualizations.", icon: Building2 },
+    {
+      title: "3D Modeling",
+      description:
+        "High-quality 3D models for any industry with precise detail and professional execution.",
+      icon: Box,
+    },
+    {
+      title: "Product Visualization",
+      description:
+        "Stunning product renders that showcase your items in the best possible light.",
+      icon: Package,
+    },
+    {
+      title: "Game Assets",
+      description:
+        "Optimized game-ready assets for any engine including Unity and Unreal.",
+      icon: Gamepad2,
+    },
+    {
+      title: "Architectural Models",
+      description:
+        "Detailed architectural visualizations that bring your designs to life.",
+      icon: Building2,
+    },
   ];
 
   const portfolio = [
@@ -153,21 +182,24 @@ export default function Home() {
       id: 1,
       title: "Gaming Chair",
       category: "Furniture",
-      image: "https://cdnb.artstation.com/p/assets/covers/images/090/414/647/smaller_square/zentroid-studios-zentroid-studios-02-3.jpg?1753857614",
+      image:
+        "https://cdnb.artstation.com/p/assets/covers/images/090/414/647/smaller_square/zentroid-studios-zentroid-studios-02-3.jpg?1753857614",
       link: "https://www.artstation.com/artwork/ZlEXw8",
     },
     {
       id: 2,
       title: "Kuboraum J9 Sun",
       category: "Eyewear",
-      image: "https://cdnb.artstation.com/p/assets/covers/images/090/022/269/smaller_square/zentroid-studios-zentroid-studios-seq0677.jpg?1752658538",
+      image:
+        "https://cdnb.artstation.com/p/assets/covers/images/090/022/269/smaller_square/zentroid-studios-zentroid-studios-seq0677.jpg?1752658538",
       link: "https://www.artstation.com/artwork/8BVGKO",
     },
     {
       id: 3,
-      title: "Nike Air DT Max 96",
+      title: "Nike Air DT Max 96 Colorado Away Sneakers",
       category: "Shoes",
-      image: "https://cdnb.artstation.com/p/assets/covers/images/089/986/675/smaller_square/zentroid-studios-zentroid-studios-1-1.jpg?1752557011",
+      image:
+        "https://cdnb.artstation.com/p/assets/covers/images/089/986/675/smaller_square/zentroid-studios-zentroid-studios-1-1.jpg?1752557011",
       link: "https://www.artstation.com/artwork/RKWWoX",
     },
   ];
@@ -179,7 +211,8 @@ export default function Home() {
       role: "Creative Director",
       company: "PixelForge Studios",
       rating: 5,
-      content: "Zentroid delivered exceptional 3D models that exceeded our expectations.",
+      content:
+        "Zentroid delivered exceptional 3D models that exceeded our expectations.",
     },
     {
       id: 2,
@@ -187,7 +220,8 @@ export default function Home() {
       role: "Product Manager",
       company: "TechVision Inc.",
       rating: 5,
-      content: "Their models are photorealistic and delivered on time.",
+      content:
+        "Working with Zentroid transformed our product visualization pipeline.",
     },
     {
       id: 3,
@@ -195,24 +229,26 @@ export default function Home() {
       role: "Game Developer",
       company: "NexGen Games",
       rating: 5,
-      content: "The game assets are perfectly optimized and look stunning.",
+      content:
+        "The game assets from Zentroid are perfectly optimized and look stunning.",
     },
   ];
 
   const [selectedModel, setSelectedModel] = useState(0);
   const [calendlyReady, setCalendlyReady] = useState(false);
 
+  const activeModel = models[selectedModel];
+
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://assets.calendly.com/assets/external/widget.css";
+    document.head.appendChild(link);
 
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     script.onload = () => setCalendlyReady(true);
-
-    document.head.appendChild(link);
     document.body.appendChild(script);
 
     return () => {
@@ -229,10 +265,13 @@ export default function Home() {
     }
   };
 
-  const handleNext = () => setSelectedModel((prev) => (prev + 1) % models.length);
-  const handlePrev = () => setSelectedModel((prev) => (prev - 1 + models.length) % models.length);
+  const handleNext = () => {
+    setSelectedModel((prev) => (prev + 1) % models.length);
+  };
 
-  const active = models[selectedModel];
+  const handlePrev = () => {
+    setSelectedModel((prev) => (prev - 1 + models.length) % models.length);
+  };
 
   return (
     <>
@@ -251,35 +290,70 @@ export default function Home() {
           <Container>
             <div className="hero-grid">
               <div className="hero-left">
-                <motion.div className="hero-badge" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+                <motion.div
+                  className="hero-badge"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
                   <Sparkles className="hero-badge-icon" />
-                  <span className="hero-badge-text">Professional 3D Modeling Services</span>
+                  <span className="hero-badge-text">
+                    Professional 3D Modeling Services
+                  </span>
                 </motion.div>
 
-                <motion.h1 className="hero-title" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-                  <span className="hero-title-white">High-Quality 3D Models</span>
+                <motion.h1
+                  className="hero-title"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <span className="hero-title-white">
+                    High-Quality 3D Models
+                  </span>
                   <br />
-                  <span className="hero-title-yellow">That Bring Ideas to Life</span>
+                  <span className="hero-title-yellow">
+                    That Bring Ideas to Life
+                  </span>
                 </motion.h1>
 
                 <p className="hero-desc">
-                  Transform your vision into stunning 3D reality. We create premium models for games, products,
-                  architecture, and immersive experiences.
+                  Transform your vision into stunning 3D reality. We create
+                  premium models for games, products, architecture, and
+                  immersive experiences.
                 </p>
 
                 <div className="hero-btns">
-                  <button className="hero-btn-primary" onClick={() => router.push("/portfolio")}>
-                    <span className="hero-btn-inner">View Portfolio <ArrowRight className="hero-btn-icon" /></span>
+                  <button
+                    className="hero-btn-primary"
+                    onClick={() => router.push("/portfolio")}
+                  >
+                    <span className="hero-btn-inner">
+                      View Portfolio <ArrowRight className="hero-btn-icon" />
+                    </span>
                   </button>
-                  <button className="hero-btn-secondary" onClick={() => router.push("/contact")}>
-                    <span className="hero-btn-inner">Start a Project <ArrowRight className="hero-btn-icon" /></span>
+
+                  <button
+                    className="hero-btn-secondary"
+                    onClick={() => router.push("/contact")}
+                  >
+                    <span className="hero-btn-inner">
+                      Start a Project <ArrowRight className="hero-btn-icon" />
+                    </span>
                   </button>
                 </div>
 
                 <div className="hero-stats">
-                  <div><div className="hero-stat-number">500+</div><div className="hero-stat-label">Projects Completed</div></div>
-                  <div><div className="hero-stat-number">100+</div><div className="hero-stat-label">Happy Clients</div></div>
-                  <div><div className="hero-stat-number">5 Years</div><div className="hero-stat-label">Experience</div></div>
+                  <div>
+                    <div className="hero-stat-number">500+</div>
+                    <div className="hero-stat-label">Projects Completed</div>
+                  </div>
+                  <div>
+                    <div className="hero-stat-number">100+</div>
+                    <div className="hero-stat-label">Happy Clients</div>
+                  </div>
+                  <div>
+                    <div className="hero-stat-number">5 Years</div>
+                    <div className="hero-stat-label">Experience</div>
+                  </div>
                 </div>
               </div>
 
@@ -299,11 +373,22 @@ export default function Home() {
                   <div className="hero-img-bar">
                     <div className="hero-img-bar-inner">
                       <div>
-                        <div className="hero-img-bar-title">Professional 3D Solutions</div>
-                        <div className="hero-img-bar-sub">Bringing your vision to reality</div>
+                        <div className="hero-img-bar-title">
+                          Professional 3D Solutions
+                        </div>
+                        <div className="hero-img-bar-sub">
+                          Bringing your vision to reality
+                        </div>
                       </div>
+
                       <div className="hero-img-bar-logo">
-                        <Image src={Favicon} alt="Zentroid Logo" width={120} height={40} priority />
+                        <Image
+                          src={Favicon}
+                          alt="Zentroid Logo"
+                          width={120}
+                          height={40}
+                          priority
+                        />
                       </div>
                     </div>
                   </div>
@@ -318,7 +403,9 @@ export default function Home() {
             <div className="showcase-header">
               <span className="showcase-label">EXPLORE OUR WORK</span>
               <h2 className="showcase-title">3D Models Showcase</h2>
-              <p className="showcase-desc">Interact with one optimized model at a time.</p>
+              <p className="showcase-desc">
+                Interact with one optimized 3D model at a time.
+              </p>
             </div>
 
             <div className="showcase-grid">
@@ -327,21 +414,27 @@ export default function Home() {
                   <div className="showcase-glass">
                     <div className="showcase-img-wrap">
                       <LazyModelViewer
-                        key={active.glb}
-                        path={active.glb}
-                        scale={active.viewerProps.scale}
-                        position={active.viewerProps.position}
-                        cameraPosition={active.viewerProps.cameraPosition}
-                        fov={active.viewerProps.fov}
+                        key={activeModel.glb}
+                        path={activeModel.glb}
+                        scale={activeModel.viewerProps.scale}
+                        position={activeModel.viewerProps.position}
+                        cameraPosition={activeModel.viewerProps.cameraPosition}
+                        fov={activeModel.viewerProps.fov}
                       />
                     </div>
                   </div>
 
-                  <button onClick={handlePrev} className="showcase-nav-btn showcase-nav-left">
+                  <button
+                    onClick={handlePrev}
+                    className="showcase-nav-btn showcase-nav-left"
+                  >
                     <ChevronLeft className="showcase-nav-icon" />
                   </button>
 
-                  <button onClick={handleNext} className="showcase-nav-btn showcase-nav-right">
+                  <button
+                    onClick={handleNext}
+                    className="showcase-nav-btn showcase-nav-right"
+                  >
                     <ChevronRight className="showcase-nav-icon" />
                   </button>
                 </div>
@@ -349,21 +442,29 @@ export default function Home() {
 
               <div>
                 <div className="showcase-info">
-                  <h3 className="showcase-model-name">{active.name}</h3>
-                  <span className="showcase-model-cat">{active.category}</span>
+                  <h3 className="showcase-model-name">{activeModel.name}</h3>
+                  <span className="showcase-model-cat">
+                    {activeModel.category}
+                  </span>
                   <p className="showcase-model-desc">
-                    Experience high-quality 3D modeling with precise detail and professional execution.
+                    Experience high-quality 3D modeling with precise detail and
+                    professional execution.
                   </p>
                 </div>
 
                 <div className="showcase-gallery">
                   <h4 className="showcase-gallery-label">Browse Models</h4>
+
                   <div className="showcase-gallery-grid">
                     {models.map((model, index) => (
                       <button
                         key={model.id}
                         onClick={() => setSelectedModel(index)}
-                        className={`showcase-thumb ${selectedModel === index ? "showcase-thumb-active" : ""}`}
+                        className={`showcase-thumb ${selectedModel === index
+                          ? "showcase-thumb-active"
+                          : ""
+                          }`}
+                        type="button"
                       >
                         <img
                           src={model.poster}
@@ -386,7 +487,9 @@ export default function Home() {
             <div className="services-header">
               <span className="services-label">OUR SERVICES</span>
               <h2 className="services-title">What We Offer</h2>
-              <p className="services-desc">Comprehensive 3D modeling solutions.</p>
+              <p className="services-desc">
+                Comprehensive 3D modeling solutions for every industry.
+              </p>
             </div>
 
             <div className="services-grid">
@@ -399,7 +502,9 @@ export default function Home() {
                       </div>
                     </div>
                     <h3 className="services-card-title">{service.title}</h3>
-                    <p className="services-card-desc">{service.description}</p>
+                    <p className="services-card-desc">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -419,14 +524,30 @@ export default function Home() {
                 <div key={project.id} className="portfolio-card-wrap">
                   <div className="portfolio-card">
                     <div className="portfolio-img-wrap">
-                      <img src={project.image} alt={project.title} className="portfolio-img" loading="lazy" />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="portfolio-img"
+                        loading="lazy"
+                      />
                     </div>
+
                     <div className="portfolio-overlay">
                       <div className="portfolio-overlay-content">
-                        <span className="portfolio-cat-badge">{project.category}</span>
-                        <h3 className="portfolio-card-title">{project.title}</h3>
-                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="portfolio-view-btn">
-                          View Project <ArrowRight className="portfolio-view-icon" />
+                        <span className="portfolio-cat-badge">
+                          {project.category}
+                        </span>
+                        <h3 className="portfolio-card-title">
+                          {project.title}
+                        </h3>
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="portfolio-view-btn"
+                        >
+                          View Project{" "}
+                          <ArrowRight className="portfolio-view-icon" />
                         </a>
                       </div>
                     </div>
@@ -449,16 +570,27 @@ export default function Home() {
                 <div key={testimonial.id} className="testimonials-card-wrap">
                   <div className="testimonials-card">
                     <Quote className="testimonials-quote-icon" />
+
                     <div className="testimonials-stars">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="testimonials-star" />
                       ))}
                     </div>
-                    <p className="testimonials-content">"{testimonial.content}"</p>
+
+                    <p className="testimonials-content">
+                      "{testimonial.content}"
+                    </p>
+
                     <div className="testimonials-author">
-                      <div className="testimonials-author-name">{testimonial.name}</div>
-                      <div className="testimonials-author-role">{testimonial.role}</div>
-                      <div className="testimonials-author-company">{testimonial.company}</div>
+                      <div className="testimonials-author-name">
+                        {testimonial.name}
+                      </div>
+                      <div className="testimonials-author-role">
+                        {testimonial.role}
+                      </div>
+                      <div className="testimonials-author-company">
+                        {testimonial.company}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -476,17 +608,26 @@ export default function Home() {
             </h2>
 
             <p className="cta-desc">
-              Let’s discuss your project and create stunning 3D models that exceed expectations.
+              Let’s discuss your project and create stunning 3D models.
             </p>
 
             <div className="cta-btns">
-              <button className="cta-btn-primary" onClick={() => router.push("/contact")}>
+              <button
+                className="cta-btn-primary"
+                onClick={() => router.push("/contact")}
+              >
                 <span className="cta-btn-inner">
-                  <Mail className="cta-btn-icon" /> Start Your Project <ArrowRight className="cta-btn-arrow" />
+                  <Mail className="cta-btn-icon" />
+                  Start Your Project
+                  <ArrowRight className="cta-btn-arrow" />
                 </span>
               </button>
 
-              <button className="cta-btn-secondary" onClick={openCalendly} disabled={!calendlyReady}>
+              <button
+                className="cta-btn-secondary"
+                onClick={openCalendly}
+                disabled={!calendlyReady}
+              >
                 <span className="cta-btn-inner">
                   <MessageCircle className="cta-btn-icon" />
                   {calendlyReady ? "Schedule a Call" : "Loading..."}
@@ -496,6 +637,113 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <style jsx global>{`
+          .lazy-model-wrap,
+          .model-viewer-safe {
+            width: 100%;
+            height: 100%;
+            min-height: 260px;
+            position: relative;
+          }
+
+          .zentroid-loader {
+            width: 100%;
+            height: 100%;
+            min-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background: radial-gradient(
+              circle,
+              rgba(255, 214, 70, 0.14) 0%,
+              rgba(0, 0, 0, 0) 55%
+            );
+          }
+
+          .zentroid-loader-ring {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.16);
+            border-top-color: #f5c542;
+            border-right-color: #f5c542;
+            animation: zentroidSpin 0.9s linear infinite;
+            margin-bottom: 16px;
+          }
+
+          .zentroid-loader-text {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            animation: zentroidPulse 1.4s ease-in-out infinite;
+          }
+
+          .zentroid-loader-sub {
+            margin-top: 6px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.65);
+          }
+
+          .showcase-thumb {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #111;
+            cursor: pointer;
+          }
+
+          .showcase-thumb-img {
+            width: 100%;
+            height: 100%;
+            min-height: 110px;
+            object-fit: cover;
+            display: block;
+          }
+
+          .showcase-thumb-active {
+            border-color: #f5c542;
+            box-shadow: 0 0 0 2px rgba(245, 197, 66, 0.35);
+          }
+
+          @keyframes zentroidSpin {
+            to {
+              transform: rotate(360deg);
+            }
+          }
+
+          @keyframes zentroidPulse {
+            0%,
+            100% {
+              opacity: 0.65;
+              transform: scale(1);
+            }
+            50% {
+              opacity: 1;
+              transform: scale(1.04);
+            }
+          }
+
+          @media (max-width: 768px) {
+            .lazy-model-wrap,
+            .model-viewer-safe,
+            .zentroid-loader {
+              min-height: 220px;
+            }
+
+            .hero-img-wrap,
+            .showcase-img-wrap {
+              min-height: 260px;
+            }
+
+            .showcase-thumb-img {
+              min-height: 90px;
+            }
+          }
+        `}</style>
       </Layout>
     </>
   );

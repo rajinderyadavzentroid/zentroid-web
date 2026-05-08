@@ -1,9 +1,27 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Bounds } from "@react-three/drei";
-import { Suspense, memo } from "react";
+import { OrbitControls, useGLTF, Bounds, Html } from "@react-three/drei";
+import { Suspense, memo, useEffect, useState } from "react";
+
+export function ZentroidLoader() {
+  return (
+    <div className="zentroid-loader">
+      <div className="zentroid-loader-ring" />
+      <div className="zentroid-loader-text">Zentroid Studios</div>
+      {/* <div className="zentroid-loader-sub">Loading 3D model...</div> */}
+    </div>
+  );
+}
 
 function Model({ path, scale, position }) {
   const { scene } = useGLTF(path);
+
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        child.frustumCulled = true;
+      }
+    });
+  }, [scene]);
 
   return (
     <primitive
@@ -15,6 +33,14 @@ function Model({ path, scale, position }) {
   );
 }
 
+function ModelFallback() {
+  return (
+    <Html center>
+      <ZentroidLoader />
+    </Html>
+  );
+}
+
 function ModelViewer({
   path,
   scale = 1,
@@ -23,32 +49,57 @@ function ModelViewer({
   fov = 25,
   enableZoom = true,
 }) {
+  const [webglAllowed, setWebglAllowed] = useState(true);
+
+  useEffect(() => {
+    const isMobile =
+      typeof window !== "undefined" &&
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    const lowMemory =
+      typeof navigator !== "undefined" &&
+      navigator.deviceMemory &&
+      navigator.deviceMemory <= 3;
+
+    if (isMobile && lowMemory) {
+      setWebglAllowed(false);
+    }
+  }, []);
+
+  if (!webglAllowed) {
+    return <ZentroidLoader />;
+  }
+
   return (
-    <Canvas
-      frameloop="demand"
-      dpr={[1, 1.5]}
-      camera={{ position: cameraPosition, fov }}
-      gl={{
-        antialias: false,
-        powerPreference: "high-performance",
-      }}
-    >
-      <ambientLight intensity={1.2} />
-      <directionalLight position={[5, 5, 5]} intensity={1.5} />
+    <div className="model-viewer-safe">
+      <Canvas
+        frameloop="demand"
+        dpr={[1, 1.25]}
+        camera={{ position: cameraPosition, fov }}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: "high-performance",
+          preserveDrawingBuffer: false,
+        }}
+      >
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[5, 5, 5]} intensity={1.4} />
 
-      <Suspense fallback={null}>
-        <Bounds fit clip observe margin={1.2}>
-          <Model path={path} scale={scale} position={position} />
-        </Bounds>
-      </Suspense>
+        <Suspense fallback={<ModelFallback />}>
+          <Bounds fit clip observe margin={1.2}>
+            <Model path={path} scale={scale} position={position} />
+          </Bounds>
+        </Suspense>
 
-      <OrbitControls
-        enableZoom={enableZoom}
-        enablePan={false}
-        autoRotate
-        autoRotateSpeed={0.8}
-      />
-    </Canvas>
+        <OrbitControls
+          enableZoom={enableZoom}
+          enablePan={false}
+          autoRotate
+          autoRotateSpeed={0.7}
+        />
+      </Canvas>
+    </div>
   );
 }
 
