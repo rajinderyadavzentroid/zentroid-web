@@ -152,26 +152,22 @@ export default function Home() {
   const services = [
     {
       title: "3D Modeling",
-      description:
-        "High-quality 3D models for any industry with precise detail and professional execution.",
+      description: "High-quality 3D models for any industry.",
       icon: Box,
     },
     {
       title: "Product Visualization",
-      description:
-        "Stunning product renders that showcase your items in the best possible light.",
+      description: "Stunning product renders for your products.",
       icon: Package,
     },
     {
       title: "Game Assets",
-      description:
-        "Optimized game-ready assets for any engine including Unity and Unreal.",
+      description: "Optimized game-ready assets.",
       icon: Gamepad2,
     },
     {
       title: "Architectural Models",
-      description:
-        "Detailed architectural visualizations that bring your designs to life.",
+      description: "Detailed architectural visualizations.",
       icon: Building2,
     },
   ];
@@ -235,7 +231,6 @@ export default function Home() {
 
   const [selectedModel, setSelectedModel] = useState(0);
   const [calendlyReady, setCalendlyReady] = useState(false);
-
   const activeModel = models[selectedModel];
 
   useEffect(() => {
@@ -281,7 +276,6 @@ export default function Home() {
           content="Professional 3D modeling services, product visualization, game assets, and architectural models."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Layout>
@@ -324,6 +318,7 @@ export default function Home() {
                   <button
                     className="hero-btn-primary"
                     onClick={() => router.push("/portfolio")}
+                    type="button"
                   >
                     <span className="hero-btn-inner">
                       View Portfolio <ArrowRight className="hero-btn-icon" />
@@ -333,6 +328,7 @@ export default function Home() {
                   <button
                     className="hero-btn-secondary"
                     onClick={() => router.push("/contact")}
+                    type="button"
                   >
                     <span className="hero-btn-inner">
                       Start a Project <ArrowRight className="hero-btn-icon" />
@@ -358,7 +354,7 @@ export default function Home() {
 
               <div className="hero-right">
                 <div className="hero-img-card">
-                  <div className="hero-img-wrap">
+                  <div className="hero-img-wrap fixed-model-box">
                     <ModelViewer
                       path="/models/north-face-base-camp-rolling.glb"
                       scale={10}
@@ -366,6 +362,7 @@ export default function Home() {
                       cameraPosition={[0, 1, 8]}
                       fov={20}
                       enableZoom={false}
+                      autoRotate={true}
                     />
                   </div>
 
@@ -411,7 +408,7 @@ export default function Home() {
               <div className="showcase-viewer-wrap">
                 <div className="showcase-viewer">
                   <div className="showcase-glass">
-                    <div className="showcase-img-wrap">
+                    <div className="showcase-img-wrap fixed-model-box">
                       <LazyModelViewer
                         key={activeModel.glb}
                         path={activeModel.glb}
@@ -419,6 +416,7 @@ export default function Home() {
                         position={activeModel.viewerProps.position}
                         cameraPosition={activeModel.viewerProps.cameraPosition}
                         fov={activeModel.viewerProps.fov}
+                        autoRotate={true}
                       />
                     </div>
                   </div>
@@ -426,6 +424,7 @@ export default function Home() {
                   <button
                     onClick={handlePrev}
                     className="showcase-nav-btn showcase-nav-left"
+                    type="button"
                   >
                     <ChevronLeft className="showcase-nav-icon" />
                   </button>
@@ -433,6 +432,7 @@ export default function Home() {
                   <button
                     onClick={handleNext}
                     className="showcase-nav-btn showcase-nav-right"
+                    type="button"
                   >
                     <ChevronRight className="showcase-nav-icon" />
                   </button>
@@ -614,6 +614,7 @@ export default function Home() {
               <button
                 className="cta-btn-primary"
                 onClick={() => router.push("/contact")}
+                type="button"
               >
                 <span className="cta-btn-inner">
                   <Mail className="cta-btn-icon" />
@@ -626,6 +627,7 @@ export default function Home() {
                 className="cta-btn-secondary"
                 onClick={openCalendly}
                 disabled={!calendlyReady}
+                type="button"
               >
                 <span className="cta-btn-inner">
                   <MessageCircle className="cta-btn-icon" />
@@ -638,18 +640,39 @@ export default function Home() {
         </section>
 
         <style jsx global>{`
+          .hero-img-wrap,
+          .showcase-img-wrap,
+          .fixed-model-box {
+            width: 100%;
+            height: 520px;
+            min-height: 520px;
+            position: relative;
+            overflow: hidden;
+            contain: layout paint size;
+            transform: translateZ(0);
+          }
+
           .lazy-model-wrap,
           .model-viewer-safe {
             width: 100%;
             height: 100%;
-            min-height: 260px;
+            min-height: inherit;
             position: relative;
+            overflow: hidden;
+          }
+
+          .model-viewer-safe canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+            touch-action: none;
+            outline: none;
           }
 
           .zentroid-loader {
             width: 100%;
             height: 100%;
-            min-height: 260px;
+            min-height: inherit;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -727,15 +750,11 @@ export default function Home() {
           }
 
           @media (max-width: 768px) {
-            .lazy-model-wrap,
-            .model-viewer-safe,
-            .zentroid-loader {
-              min-height: 220px;
-            }
-
             .hero-img-wrap,
-            .showcase-img-wrap {
-              min-height: 260px;
+            .showcase-img-wrap,
+            .fixed-model-box {
+              height: 360px;
+              min-height: 360px;
             }
 
             .showcase-thumb-img {
