@@ -7,12 +7,11 @@ export function ZentroidLoader() {
     <div className="zentroid-loader">
       <div className="zentroid-loader-ring" />
       <div className="zentroid-loader-text">Zentroid Studios</div>
-      {/* <div className="zentroid-loader-sub">Loading 3D model...</div> */}
     </div>
   );
 }
 
-function Model({ path, scale, position, rotation = [0, 0, 0] }) {
+function Model({ path, scale, position, rotation = [0, 0, 0], onLoaded }) {
   const { scene } = useGLTF(path);
 
   useEffect(() => {
@@ -21,7 +20,9 @@ function Model({ path, scale, position, rotation = [0, 0, 0] }) {
         child.frustumCulled = false;
       }
     });
-  }, [scene]);
+
+    onLoaded?.();
+  }, [scene, onLoaded]);
 
   return (
     <primitive
@@ -51,18 +52,16 @@ function ModelViewer({
   fov = 25,
   enableZoom = true,
   autoRotate = true,
+  onLoaded,
 }) {
-  const [webglError, setWebglError] = useState(false);
-
-  if (webglError) {
-    return <ZentroidLoader />;
-  }
+  const [recoverKey, setRecoverKey] = useState(0);
 
   return (
     <div className="model-viewer-safe">
       <Canvas
+        key={recoverKey}
         frameloop="always"
-        dpr={[1, 1.25]}
+        dpr={[1, 1.15]}
         camera={{
           position: cameraPosition,
           fov,
@@ -77,10 +76,17 @@ function ModelViewer({
         }}
         onCreated={({ gl, camera }) => {
           camera.lookAt(0, 0, 0);
-          gl.domElement.addEventListener("webglcontextlost", (event) => {
+
+          const canvas = gl.domElement;
+
+          const handleLost = (event) => {
             event.preventDefault();
-            setWebglError(true);
-          });
+            setTimeout(() => {
+              setRecoverKey((prev) => prev + 1);
+            }, 300);
+          };
+
+          canvas.addEventListener("webglcontextlost", handleLost, false);
         }}
       >
         <ambientLight intensity={1.25} />
@@ -92,6 +98,7 @@ function ModelViewer({
             scale={scale}
             position={position}
             rotation={rotation}
+            onLoaded={onLoaded}
           />
         </Suspense>
 

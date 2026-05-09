@@ -27,14 +27,13 @@ function ZentroidPageLoader() {
     <div className="zentroid-loader">
       <div className="zentroid-loader-ring" />
       <div className="zentroid-loader-text">Zentroid Studios</div>
-      {/* <div className="zentroid-loader-sub">Loading 3D model...</div> */}
     </div>
   );
 }
 
 const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), {
   ssr: false,
-  loading: () => <ZentroidPageLoader />,
+  loading: () => null,
 });
 
 function LazyModelViewer(props) {
@@ -230,8 +229,30 @@ export default function Home() {
   ];
 
   const [selectedModel, setSelectedModel] = useState(0);
+  const [heroKey, setHeroKey] = useState(0);
+  const [showcaseKey, setShowcaseKey] = useState(0);
+  const [modelLoading, setModelLoading] = useState(false);
   const [calendlyReady, setCalendlyReady] = useState(false);
+
   const activeModel = models[selectedModel];
+
+  useEffect(() => {
+    const restoreHero = () => {
+      setHeroKey((prev) => prev + 1);
+    };
+
+    const handleVisibility = () => {
+      if (!document.hidden) restoreHero();
+    };
+
+    window.addEventListener("pageshow", restoreHero);
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      window.removeEventListener("pageshow", restoreHero);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -251,20 +272,35 @@ export default function Home() {
     };
   }, []);
 
+  const safeSelectModel = (index) => {
+    if (modelLoading) return;
+    if (index === selectedModel) return;
+
+    setModelLoading(true);
+    setSelectedModel(index);
+    setShowcaseKey((prev) => prev + 1);
+
+    setTimeout(() => {
+      setModelLoading(false);
+    }, 1200);
+  };
+
+  const handleNext = () => {
+    if (modelLoading) return;
+    safeSelectModel((selectedModel + 1) % models.length);
+  };
+
+  const handlePrev = () => {
+    if (modelLoading) return;
+    safeSelectModel((selectedModel - 1 + models.length) % models.length);
+  };
+
   const openCalendly = () => {
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
         url: "https://calendly.com/shaguna-zentroid/30min",
       });
     }
-  };
-
-  const handleNext = () => {
-    setSelectedModel((prev) => (prev + 1) % models.length);
-  };
-
-  const handlePrev = () => {
-    setSelectedModel((prev) => (prev - 1 + models.length) % models.length);
   };
 
   return (
@@ -356,6 +392,7 @@ export default function Home() {
                 <div className="hero-img-card">
                   <div className="hero-img-wrap fixed-model-box">
                     <ModelViewer
+                      key={heroKey}
                       path="/models/north-face-base-camp-rolling.glb"
                       scale={10}
                       position={[0, -0.6, 0]}
@@ -410,14 +447,17 @@ export default function Home() {
                   <div className="showcase-glass">
                     <div className="showcase-img-wrap fixed-model-box">
                       <LazyModelViewer
-                        key={activeModel.glb}
+                        key={`${activeModel.glb}-${showcaseKey}`}
                         path={activeModel.glb}
                         scale={activeModel.viewerProps.scale}
                         position={activeModel.viewerProps.position}
                         cameraPosition={activeModel.viewerProps.cameraPosition}
                         fov={activeModel.viewerProps.fov}
                         autoRotate={true}
+                        onLoaded={() => setModelLoading(false)}
                       />
+
+                      {modelLoading && <div className="model-click-lock" />}
                     </div>
                   </div>
 
@@ -425,6 +465,7 @@ export default function Home() {
                     onClick={handlePrev}
                     className="showcase-nav-btn showcase-nav-left"
                     type="button"
+                    disabled={modelLoading}
                   >
                     <ChevronLeft className="showcase-nav-icon" />
                   </button>
@@ -433,6 +474,7 @@ export default function Home() {
                     onClick={handleNext}
                     className="showcase-nav-btn showcase-nav-right"
                     type="button"
+                    disabled={modelLoading}
                   >
                     <ChevronRight className="showcase-nav-icon" />
                   </button>
@@ -458,12 +500,13 @@ export default function Home() {
                     {models.map((model, index) => (
                       <button
                         key={model.id}
-                        onClick={() => setSelectedModel(index)}
+                        onClick={() => safeSelectModel(index)}
                         className={`showcase-thumb ${selectedModel === index
                           ? "showcase-thumb-active"
                           : ""
                           }`}
                         type="button"
+                        disabled={modelLoading}
                       >
                         <img
                           src={model.poster}
@@ -704,10 +747,12 @@ export default function Home() {
             animation: zentroidPulse 1.4s ease-in-out infinite;
           }
 
-          .zentroid-loader-sub {
-            margin-top: 6px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.65);
+          .model-click-lock {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            pointer-events: all;
+            background: transparent;
           }
 
           .showcase-thumb {
@@ -716,6 +761,12 @@ export default function Home() {
             border: 1px solid rgba(255, 255, 255, 0.15);
             background: #111;
             cursor: pointer;
+          }
+
+          .showcase-thumb:disabled,
+          .showcase-nav-btn:disabled {
+            pointer-events: none;
+            opacity: 0.65;
           }
 
           .showcase-thumb-img {
