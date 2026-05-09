@@ -1,247 +1,326 @@
-# Next.js 3D Performance Optimization Guide
+Zentroid Studios Next.js 3D Model Optimization Notes
 
-## Problem
+1. Main Problem
 
-The website was loading very slowly because multiple `.glb` 3D models were rendered at the same time.
-
-Issues included:
-
-- Browser freezing
-- 15+ second loading times
-- "Wait or Exit Page" popup
-- High GPU and CPU usage
-- Too many WebGL canvases
-
----
-
-# Optimizations Applied
-
-## 1. Removed Multiple Active 3D Renderers
-
-### BEFORE
-
-Every thumbnail loaded a full 3D viewer.
+The website was slow and sometimes crashed because multiple .glb 3D models were being loaded and rendered at the same time.
 
 This caused:
-
-- 6+ WebGL canvases
-- Huge memory usage
-- Heavy GPU load
-
-### AFTER
-
-Only ONE active 3D model is rendered.
-
-Thumbnail previews now use lightweight PNG images instead of GLB viewers.
-
----
-
-# 2. Added Dynamic Imports
-
-## BEFORE
-
-```js
-import ModelViewer from "@/src/component/ModelViewer";
-```
-
-## AFTER
-
-```js
-const ModelViewer = dynamic(
-  () => import("@/src/component/ModelViewer"),
-  {
-    ssr: false,
-    loading: () => <div>Loading 3D...</div>,
-  }
-);
-```
-
-Benefits:
-
-- Prevents server-side rendering of WebGL
-- Faster first page load
-- Smaller initial bundle size
-
----
-
-# 3. Added Lazy Loading
-
-Created:
-
-```js
-function LazyModelViewer(props)
-```
-
-Uses:
-
-```js
-IntersectionObserver
-```
-
-This means:
-
-- Models load ONLY when visible
-- Reduces initial network usage
-- Faster homepage rendering
-
----
-
-# 4. Optimized React Three Fiber
-
-Updated Canvas settings:
-
-```js
-<Canvas
-  frameloop="demand"
-  dpr={[1, 1.5]}
-  gl={{
-    antialias: false,
-    powerPreference: "high-performance",
-  }}
->
-```
-
-Benefits:
-
-- Lower GPU usage
-- Better FPS
-- Less battery drain
-- Faster rendering
-
----
-
-# 5. Added Suspense Loading
-
-```js
-<Suspense fallback={null}>
-```
-
-Prevents blocking the UI while models load.
-
----
-
-# 6. Replaced Thumbnail GLBs with PNGs
-
-## BEFORE
-
-Each thumbnail loaded:
-
-```js
-<ModelViewer />
-```
-
-## AFTER
-
-```js
-<img src={model.poster} />
-```
-
-This is the BIGGEST performance improvement.
-
----
-
-# 7. Optimized Folder Structure
-
-## Final Structure
-
-```txt
-public/
- └── models/
-      ├── fendi-bag.glb
-      ├── fendi-bag.png
-      ├── north-face-base-camp-rolling.glb
-      ├── north-face-base-camp-rolling.png
-      ├── gaming-chair-compressed.glb
-      ├── gaming-chair-compressed.png
-      ├── graham-fortress.glb
-      ├── graham-fortress.png
-      ├── kuboraum-sun.glb
-      ├── kuboraum-sun.png
-      ├── nike-air-sneakers.glb
-      └── nike-air-sneakers.png
-```
-
----
-
-# 8. Fixed 404 Errors
-
-The issue happened because:
-
-```txt
-/models/example.glb
-```
-
-did not exist in the `public/models/` folder.
-
-Correct fix:
-
-- Ensure GLB filename matches exactly
-- Ensure file exists inside `public/models`
-
----
-
-# 9. Recommended GLB Compression
-
-Install:
-
-```bash
-npm install @gltf-transform/cli draco3dgltf
-```
-
-Compress models:
-
-```bash
-gltf-transform optimize input.glb output.glb --draco
-```
-
-Typical savings:
-
-- 80MB → 5MB
-- 40MB → 2MB
-
-This drastically improves load speed.
-
----
-
-# 10. Performance Results
-
-## BEFORE
-
-- 15–25 second load
+- Slow page loading
 - Browser freezing
-- High memory usage
+- Mobile Safari crash issue
+- WebGL memory issues
+- Multiple loaders showing at once
+- Hero model disappearing after scrolling
 
-## AFTER
 
-- 2–5 second load
-- Smooth interaction
-- Stable rendering
-- Lower GPU usage
+2. Main Changes Made
 
----
+We optimized the 3D model loading flow without changing the website design or user flow.
 
-# Files Changed
+The main improvements are:
 
-## Created
+- Only one main 3D model renders in the hero section.
+- Only one selected 3D model renders in the 3D Models Showcase section.
+- Thumbnail cards use PNG images instead of loading GLB models.
+- Model loading is protected from fast repeated clicks.
+- Next and Previous buttons are disabled while a model is loading.
+- Hero model can recover if WebGL context is lost.
+- Loader text was simplified to only show "Zentroid Studios".
+- Removed the "Loading 3D model..." line.
+- Fixed double loader issue.
+- Added mobile-safe click protection.
 
-- `src/component/ModelViewer.jsx`
 
-## Updated
+3. Hero Section Fix
 
-- `pages/index.js`
+Problem:
+When the user scrolled down and came back to the first section, the hero 3D model sometimes disappeared.
 
-## Added
+Fix:
+We added a heroKey state.
 
-- PNG poster images
+When the page becomes visible again or restores from browser cache, we increase heroKey.
 
----
+This forces the hero ModelViewer to remount safely.
 
-# Final Recommendation
+Code concept:
 
-For best performance:
+const [heroKey, setHeroKey] = useState(0);
 
-- Keep only 1 active GLB viewer
-- Use PNG thumbnails
-- Compress all GLB files
-- Use lazy loading
-- Avoid rendering hidden models
+<ModelViewer key={heroKey} />
+
+This helps reload the hero model if WebGL is lost or paused by the browser.
+
+
+4. Showcase Section Fix
+
+Problem:
+In the 3D Models Showcase section, users clicked multiple thumbnails or next/previous arrows very fast.
+
+On mobile, this caused Safari/WebView to crash with:
+"A problem repeatedly occurred"
+
+Fix:
+We added modelLoading state.
+
+When a model is changing:
+- modelLoading becomes true
+- thumbnails are disabled
+- next/previous buttons are disabled
+- user cannot trigger another model load
+- after model load completes, modelLoading becomes false
+
+Code concept:
+
+const [modelLoading, setModelLoading] = useState(false);
+
+if (modelLoading) return;
+
+This prevents multiple GLB files from loading at the same time.
+
+
+5. Safe Model Selection
+
+We created a safeSelectModel function.
+
+Its purpose:
+- Prevent repeated model switching
+- Ignore clicks while loading
+- Ignore clicks on already selected model
+- Update selected model safely
+- Trigger showcase remount using showcaseKey
+
+Code concept:
+
+const safeSelectModel = (index) => {
+  if (modelLoading) return;
+  if (index === selectedModel) return;
+
+  setModelLoading(true);
+  setSelectedModel(index);
+  setShowcaseKey((prev) => prev + 1);
+
+  setTimeout(() => {
+    setModelLoading(false);
+  }, 1200);
+};
+
+This protects desktop and mobile from multiple heavy 3D loads.
+
+
+6. Next and Previous Button Protection
+
+Problem:
+Fast clicking on next arrow caused multiple models to load together.
+
+Fix:
+Next and previous buttons check modelLoading first.
+
+Code concept:
+
+const handleNext = () => {
+  if (modelLoading) return;
+  safeSelectModel((selectedModel + 1) % models.length);
+};
+
+const handlePrev = () => {
+  if (modelLoading) return;
+  safeSelectModel((selectedModel - 1 + models.length) % models.length);
+};
+
+Buttons are also disabled while loading:
+
+disabled={modelLoading}
+
+
+7. Loader Fix
+
+Problem:
+Sometimes two loaders appeared at the same time.
+
+Reason:
+There was one loader from Next dynamic import and another loader inside React Three Fiber Suspense.
+
+Fix:
+We changed dynamic import loader to return null.
+
+Code concept:
+
+const ModelViewer = dynamic(() => import("@/src/component/ModelViewer"), {
+  ssr: false,
+  loading: () => null,
+});
+
+Now only the Suspense loader inside ModelViewer is shown.
+
+We also removed this line:
+
+Loading 3D model...
+
+Now loader only shows:
+
+Zentroid Studios
+
+
+8. ModelViewer Component Functionality
+
+ModelViewer handles:
+- Rendering the GLB file
+- Creating the Canvas
+- Adding lights
+- Adding OrbitControls
+- Handling WebGL context loss
+- Showing loader while model loads
+- Calling onLoaded when model is ready
+
+Important settings:
+
+frameloop="always"
+
+This keeps the model animation and controls working.
+
+dpr={[1, 1.15]}
+
+This lowers GPU usage, especially on mobile.
+
+antialias: false
+
+This improves performance.
+
+preserveDrawingBuffer: false
+
+This reduces memory usage.
+
+enablePan={false}
+
+This stops model position from shifting.
+
+enableDamping={false}
+
+This avoids unnecessary animation calculations.
+
+target={[0, 0, 0]}
+
+This keeps the model centered.
+
+
+9. WebGL Recovery
+
+Problem:
+Mobile browsers may lose WebGL context when memory is high.
+
+Fix:
+We listen for webglcontextlost.
+
+When this happens:
+- prevent default browser behavior
+- increase recoverKey
+- remount Canvas
+
+Code concept:
+
+canvas.addEventListener("webglcontextlost", handleLost, false);
+
+setRecoverKey((prev) => prev + 1);
+
+This helps recover the 3D model instead of leaving blank space.
+
+
+10. Thumbnail Optimization
+
+Before:
+Each thumbnail could load a 3D model.
+
+After:
+Thumbnails use PNG images.
+
+Example:
+
+<img src={model.poster} alt={model.name} />
+
+This is much faster and safer.
+
+Required files:
+
+public/models/fendi-bag.png
+public/models/north-face-base-camp-rolling.png
+public/models/gaming-chair-compressed.png
+public/models/nike-air-sneakers.png
+public/models/kuboraum-sun.png
+public/models/graham-fortress.png
+
+
+11. GLB Files Required
+
+The actual 3D viewer still needs GLB files.
+
+Required files:
+
+public/models/fendi-bag.glb
+public/models/north-face-base-camp-rolling.glb
+public/models/gaming-chair-compressed.glb
+public/models/nike-air-sneakers.glb
+public/models/kuboraum-sun.glb
+public/models/graham-fortress.glb
+
+If any GLB file name does not match, the website will show 404 error.
+
+
+12. Final Behavior
+
+Hero Section:
+- Shows one 3D model.
+- Model remains interactive.
+- Model can recover if browser loses WebGL.
+- Model reloads safely when returning to page.
+
+3D Models Showcase:
+- Shows one selected 3D model.
+- Shows PNG thumbnails for all models.
+- User can select models.
+- User can use next and previous arrows.
+- Fast repeated clicks are blocked.
+- Mobile crash risk is reduced.
+- Only one GLB loads at a time.
+
+Loader:
+- Shows centered animated loader.
+- Text says "Zentroid Studios".
+- No duplicate loader.
+- No "Loading 3D model..." line.
+
+Mobile:
+- Uses lower canvas pixel ratio.
+- Blocks repeated clicks during loading.
+- Prevents multiple GLB loads.
+- Reduces Safari/WebView crash risk.
+
+
+13. Why This Works
+
+The biggest reason for crashes was multiple heavy GLB files loading quickly.
+
+Now:
+- Model switching is controlled.
+- Buttons are locked while loading.
+- Only one active model loads.
+- WebGL canvas has recovery handling.
+- GPU usage is reduced.
+- Thumbnail previews do not use WebGL.
+
+This keeps the same website flow but makes it more stable and faster.
+
+
+14. Recommended Extra Step
+
+Compress all GLB files for best performance.
+
+Command:
+
+npm install @gltf-transform/cli draco3dgltf
+
+Then:
+
+npx gltf-transform optimize input.glb output.glb --compress draco
+
+This can reduce large model size significantly and improve mobile stability.
