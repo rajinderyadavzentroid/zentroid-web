@@ -75,8 +75,8 @@ export default function Home() {
       glb: "/models/fendi-bag.glb",
       poster: "/models/fendi-bag.png",
       viewerProps: {
-        scale: 10,
-        position: [0, -0.9, 0],
+        scale: 6,
+        position: [0, -0.2, 0],
         cameraPosition: [0, 1, 8],
         fov: 20,
       },
@@ -88,8 +88,8 @@ export default function Home() {
       glb: "/models/north-face-base-camp-rolling.glb",
       poster: "/models/north-face-base-camp-rolling.png",
       viewerProps: {
-        scale: 10,
-        position: [0, -0.7, 0],
+        scale: 8,
+        position: [0, -0.2, 0],
         cameraPosition: [0, 1, 8],
         fov: 20,
       },
@@ -101,8 +101,8 @@ export default function Home() {
       glb: "/models/gaming-chair-compressed.glb",
       poster: "/models/gaming-chair-compressed.png",
       viewerProps: {
-        scale: 4,
-        position: [0, -0.9, 0],
+        scale: 3,
+        position: [0, -0.3, 0],
         cameraPosition: [0, 1, 8],
         fov: 20,
       },
@@ -114,8 +114,8 @@ export default function Home() {
       glb: "/models/nike-air-sneakers.glb",
       poster: "/models/nike-air-sneakers.png",
       viewerProps: {
-        scale: 0.08,
-        position: [0, -0.6, 0],
+        scale: 0.06,
+        position: [0, -0.01, 0],
         cameraPosition: [0, 1, 10],
         fov: 20,
       },
@@ -128,7 +128,7 @@ export default function Home() {
       poster: "/models/kuboraum-sun.png",
       viewerProps: {
         scale: 0.1,
-        position: [0, -0.2, 0],
+        position: [0, -0.001, 0],
         cameraPosition: [0, 1, 8],
         fov: 20,
       },
@@ -140,8 +140,8 @@ export default function Home() {
       glb: "/models/graham-fortress.glb",
       poster: "/models/graham-fortress.png",
       viewerProps: {
-        scale: 8,
-        position: [0, -0.8, 0],
+        scale: 6,
+        position: [0, -0.3, 0],
         cameraPosition: [0, 1, 8],
         fov: 20,
       },
@@ -316,119 +316,88 @@ export default function Home() {
 
       <Layout>
         <section className="hero-section">
+          <div className="hero-bg">
+            <motion.div className="hero-blob hero-blob-1" animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+            <motion.div className="hero-blob hero-blob-2" animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
+            <motion.div className="hero-blob hero-blob-3" animate={{ scale: [1, 1.1, 1], rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} />
+          </div>
+          <div className="hero-shapes">
+            <motion.div className="hero-shape hero-shape-1" style={{ transformStyle: "preserve-3d" }} animate={{ y: [0, -30, 0], rotateX: [0, 360], rotateY: [0, 360] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} />
+            <motion.div className="hero-shape hero-shape-2" animate={{ y: [0, 40, 0], scale: [1, 1.2, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
+            <motion.div className="hero-shape hero-shape-3" animate={{ y: [0, -40, 0], rotate: [0, 180, 360] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }} />
+          </div>
           <Container>
             <div className="hero-grid">
+              {/* Left Side */}
               <div className="hero-left">
-                <motion.div
-                  className="hero-badge"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="hero-badge">
                   <Sparkles className="hero-badge-icon" />
-                  <span className="hero-badge-text">
-                    Professional 3D Modeling Services
-                  </span>
+                  <span className="hero-badge-text">Professional 3D Modeling Services</span>
                 </motion.div>
-
-                <motion.h1
-                  className="hero-title"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <span className="hero-title-white">
-                    High-Quality 3D Models
-                  </span>
+                <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="hero-title">
+                  <span className="hero-title-white">High-Quality 3D Models</span>
                   <br />
-                  <span className="hero-title-yellow">
-                    That Bring Ideas to Life
-                  </span>
+                  <span className="hero-title-yellow">That Bring Ideas to Life</span>
                 </motion.h1>
-
-                <p className="hero-desc">
-                  Transform your vision into stunning 3D reality. We create
-                  premium models for games, products, architecture, and
-                  immersive experiences.
-                </p>
-
-                <div className="hero-btns">
-                  <button
-                    className="hero-btn-primary"
-                    onClick={() => router.push("/portfolio")}
-                    type="button"
-                  >
-                    <span className="hero-btn-inner">
-                      View Portfolio <ArrowRight className="hero-btn-icon" />
-                    </span>
-                  </button>
-
-                  <button
-                    className="hero-btn-secondary"
-                    onClick={() => router.push("/contact")}
-                    type="button"
-                  >
-                    <span className="hero-btn-inner">
-                      Start a Project <ArrowRight className="hero-btn-icon" />
-                    </span>
-                  </button>
-                </div>
-
-                <div className="hero-stats">
-                  <div>
-                    <div className="hero-stat-number">500+</div>
-                    <div className="hero-stat-label">Projects Completed</div>
-                  </div>
-                  <div>
-                    <div className="hero-stat-number">100+</div>
-                    <div className="hero-stat-label">Happy Clients</div>
-                  </div>
-                  <div>
-                    <div className="hero-stat-number">5 Years</div>
-                    <div className="hero-stat-label">Experience</div>
-                  </div>
-                </div>
+                <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="hero-desc">
+                  Transform your vision into stunning 3D reality. We create premium models for games, products, architecture, and immersive experiences.
+                </motion.p>
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="hero-btns">
+                  <button className="hero-btn-primary"><span className="hero-btn-inner" onClick={() => router.push("/portfolio")}>View Portfolio <ArrowRight className="hero-btn-icon" /></span></button>
+                  <button className="hero-btn-secondary"><span className="hero-btn-inner" onClick={() => router.push("/contact")}>Start a Project <ArrowRight className="hero-btn-icon" /></span></button>
+                </motion.div>
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="hero-stats">
+                  <div><div className="hero-stat-number">500+</div><div className="hero-stat-label">Projects Completed</div></div>
+                  <div><div className="hero-stat-number">100+</div><div className="hero-stat-label">Happy Clients</div></div>
+                  <div><div className="hero-stat-number">5 Years</div><div className="hero-stat-label">Experience</div></div>
+                </motion.div>
               </div>
 
-              <div className="hero-right">
-                <div className="hero-img-card">
-                  <div className="hero-img-wrap fixed-model-box">
-                    <ModelViewer
-                      key={heroKey}
-                      path="/models/north-face-base-camp-rolling.glb"
-                      scale={10}
-                      position={[0, -0.6, 0]}
-                      cameraPosition={[0, 1, 8]}
-                      fov={20}
-                      enableZoom={false}
-                      autoRotate={true}
-                    />
-                  </div>
-
-                  <div className="hero-img-bar">
-                    <div className="hero-img-bar-inner">
-                      <div>
-                        <div className="hero-img-bar-title">
-                          Professional 3D Solutions
-                        </div>
-                        <div className="hero-img-bar-sub">
-                          Bringing your vision to reality
-                        </div>
-                      </div>
-
-                      <div className="hero-img-bar-logo">
-                        <Image
-                          src={Favicon}
-                          alt="Zentroid Logo"
-                          width={120}
-                          height={40}
-                          priority
-                        />
-                      </div>
+              {/* Right Side */}
+              <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.4 }} className="hero-right">
+                <div className="hero-img-glow" />
+                <div className="hero-img-group">
+                  <div className="hero-img-corner hero-img-corner-tl" />
+                  <div className="hero-img-corner hero-img-corner-br" />
+                  <div className="hero-img-card">
+                    <div className="hero-img-overlay" />
+                    <div className="hero-img-wrap">
+                      <ModelViewer
+                        path="/models/north-face-base-camp-rolling.glb"
+                        scale={10}
+                        position={[0, -0.6, 0]}
+                        cameraPosition={[0, 1, 8]}
+                        fov={20}
+                        enableZoom={false}
+                      />
                     </div>
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1 }} className="hero-img-bar">
+                      <div className="hero-img-bar-inner">
+                        <div>
+                          <div className="hero-img-bar-title">Professional 3D Solutions</div>
+                          <div className="hero-img-bar-sub">Bringing your vision to reality</div>
+                        </div>
+                        <div className="hero-img-bar-logo"><Image src={Favicon} alt="Zentroid Logo" width={120} height={40} /></div>
+                      </div>
+                    </motion.div>
                   </div>
+                  <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 1.2 }} className="hero-float-card hero-float-card-left">
+                    <div className="hero-float-value">98%</div>
+                    <div className="hero-float-label">Success Rate</div>
+                  </motion.div>
+                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 1.4 }} className="hero-float-card hero-float-card-right">
+                    <div className="hero-float-value">24/7</div>
+                    <div className="hero-float-label">Support</div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </Container>
+          <motion.div className="hero-scroll" animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+            <div className="hero-scroll-outer">
+              <motion.div className="hero-scroll-dot" animate={{ y: [0, 16, 0] }} transition={{ duration: 2, repeat: Infinity }} />
+            </div>
+          </motion.div>
         </section>
 
         <section className="showcase-section">
@@ -459,6 +428,8 @@ export default function Home() {
 
                       {modelLoading && <div className="model-click-lock" />}
                     </div>
+                    <div className="showcase-glow "></div>
+
                   </div>
 
                   <button
@@ -687,8 +658,8 @@ export default function Home() {
           .showcase-img-wrap,
           .fixed-model-box {
             width: 100%;
-            height: 520px;
-            min-height: 520px;
+            height: 765px;
+            min-height: 765px;
             position: relative;
             overflow: hidden;
             contain: layout paint size;
