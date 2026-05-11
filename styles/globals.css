@@ -4015,3 +4015,10 @@ body {
     background: linear-gradient(135deg, rgba(255, 242, 0, 0.1), transparent, rgba(255, 242, 0, 0.1));
     pointer-events: none;
 }
+
+
+@media (max-width: 768px) {
+    .mobile-hide {
+        display: none !important;
+    }
+}

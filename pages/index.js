@@ -434,7 +434,7 @@ export default function Home() {
 
                   <button
                     onClick={handlePrev}
-                    className="showcase-nav-btn showcase-nav-left"
+                    className="showcase-nav-btn showcase-nav-left mobile-hide"
                     type="button"
                     disabled={modelLoading}
                   >
@@ -443,7 +443,7 @@ export default function Home() {
 
                   <button
                     onClick={handleNext}
-                    className="showcase-nav-btn showcase-nav-right"
+                    className="showcase-nav-btn showcase-nav-right mobile-hide"
                     type="button"
                     disabled={modelLoading}
                   >
