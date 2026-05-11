@@ -303,6 +303,9 @@ export default function Home() {
     }
   };
 
+  console.log('test live');
+
+
   return (
     <>
       <Head>
