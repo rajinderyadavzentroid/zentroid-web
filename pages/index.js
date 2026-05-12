@@ -392,7 +392,7 @@ export default function Home() {
                     <div className="hero-float-value">24/7</div>
                     <div className="hero-float-label">Support</div>
                   </motion.div>
-                </div>
+                </div>   
               </motion.div>
             </div>
           </Container>
