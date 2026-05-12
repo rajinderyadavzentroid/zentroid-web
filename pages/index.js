@@ -53,7 +53,14 @@ function LazyModelViewer(props) {
       { rootMargin: "200px" }
     );
 
-    observer.observe(ref.current);
+    // If already in viewport on mount (e.g. model switched while scrolled away), show immediately
+    const rect = ref.current.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200) {
+      setVisible(true);
+    } else {
+      observer.observe(ref.current);
+    }
+
     return () => observer.disconnect();
   }, []);
 
@@ -236,14 +243,12 @@ export default function Home() {
 
   const activeModel = models[selectedModel];
 
-  useEffect(() => {
-    const restoreHero = () => {
-      setHeroKey((prev) => prev + 1);
-    };
+  const heroCanvasRef = useRef(null);
 
-    const handleVisibility = () => {
-      if (!document.hidden) restoreHero();
-    };
+  useEffect(() => {
+    const restoreHero = () => setHeroKey((prev) => prev + 1);
+
+    const handleVisibility = () => { if (!document.hidden) restoreHero(); };
 
     window.addEventListener("pageshow", restoreHero);
     document.addEventListener("visibilitychange", handleVisibility);
@@ -253,6 +258,16 @@ export default function Home() {
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
+
+  useEffect(() => {
+    const wrap = heroCanvasRef.current;
+    if (!wrap) return;
+    const canvas = wrap.querySelector("canvas");
+    if (!canvas) return;
+    const handleLost = () => setTimeout(() => setHeroKey((prev) => prev + 1), 100);
+    canvas.addEventListener("webglcontextlost", handleLost);
+    return () => canvas.removeEventListener("webglcontextlost", handleLost);
+  }, [heroKey]);
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -279,6 +294,7 @@ export default function Home() {
     setModelLoading(true);
     setSelectedModel(index);
     setShowcaseKey((prev) => prev + 1);
+    setHeroKey((prev) => prev + 1);
 
     setTimeout(() => {
       setModelLoading(false);
@@ -364,9 +380,10 @@ export default function Home() {
                   <div className="hero-img-corner hero-img-corner-br" />
                   <div className="hero-img-card">
                     <div className="hero-img-overlay" />
-                    <div className="hero-img-wrap">
+                    <div className="hero-img-wrap" ref={heroCanvasRef}>
                       <ModelViewer
-                        path="/models/north-face-base-camp-rolling.glb"
+                        key={heroKey}
+                        path="/models/north-face-base-camp-rolling-2.glb"
                         scale={10}
                         position={[0, -0.6, 0]}
                         cameraPosition={[0, 1, 8]}
@@ -392,7 +409,7 @@ export default function Home() {
                     <div className="hero-float-value">24/7</div>
                     <div className="hero-float-label">Support</div>
                   </motion.div>
-                </div>   
+                </div>
               </motion.div>
             </div>
           </Container>
