@@ -795,13 +795,20 @@ export default function Home() {
             .hero-img-wrap,
             .showcase-img-wrap,
             .fixed-model-box {
-              height: 360px;
+              height: 430px;
               min-height: 360px;
             }
 
             .showcase-thumb-img {
               min-height: 90px;
             }
+              .hero-img-corner-tl {
+    display: none;
+}
+          }
+
+          .hero-img-corner-br {
+    display: none;
           }
         `}</style>
       </Layout>
