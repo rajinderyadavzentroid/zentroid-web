@@ -22,11 +22,11 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Favicon from "../src/images/favicon.ico";
 
-function ZentroidPageLoader() {
+function ZentroidPageLoader({ className }) {
   return (
-    <div className="zentroid-loader">
+    <div className={`${className ? 'zentroid-loader-showcase' : 'zentroid-loader'}`}>
       <div className="zentroid-loader-ring" />
-      <div className="zentroid-loader-text">Zentroid Studios</div>
+      <div className={`${className ? 'zentroid-loader-text-black' : 'zentroid-loader-text'}`}>Zentroid Studios</div>
     </div>
   );
 }
@@ -66,7 +66,8 @@ function LazyModelViewer(props) {
 
   return (
     <div ref={ref} className="lazy-model-wrap">
-      {visible ? <ModelViewer {...props} /> : <ZentroidPageLoader />}
+      {visible ? <ModelViewer {...props} /> : <ZentroidPageLoader {...props} />}
+      {/* <ZentroidPageLoader {...props} /> */}
     </div>
   );
 }
@@ -438,6 +439,7 @@ export default function Home() {
                       <LazyModelViewer
                         key={`${activeModel.glb}-${showcaseKey}`}
                         path={activeModel.glb}
+                        className='zentroid-loader-showcase'
                         scale={activeModel.viewerProps.scale}
                         position={activeModel.viewerProps.position}
                         cameraPosition={activeModel.viewerProps.cameraPosition}
@@ -719,6 +721,23 @@ export default function Home() {
             );
           }
 
+        .zentroid-loader-showcase {
+            width: 100%;
+            height: 100%;
+            min-height: inherit;
+            display: flex;
+            padding-bottom:220px !important;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            // background: radial-gradient(
+            //   circle,
+            //   rgba(255, 214, 70, 0.14) 0%,
+            //   rgba(0, 0, 0, 0) 55%
+            // );
+          }
+
           .zentroid-loader-ring {
             width: 62px;
             height: 62px;
@@ -735,6 +754,13 @@ export default function Home() {
             font-weight: 800;
             letter-spacing: 0.5px;
             color: #ffffff;
+            animation: zentroidPulse 1.4s ease-in-out infinite;
+          }
+            .zentroid-loader-text-black {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #070707;
             animation: zentroidPulse 1.4s ease-in-out infinite;
           }
 

@@ -2,11 +2,11 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Html } from "@react-three/drei";
 import { Suspense, memo, useEffect, useState } from "react";
 
-export function ZentroidLoader() {
+function ZentroidLoader({ className }) {
   return (
-    <div className="zentroid-loader">
+    <div className={`${className ? 'zentroid-loader-showcase' : 'zentroid-loader'}`}>
       <div className="zentroid-loader-ring" />
-      <div className="zentroid-loader-text">Zentroid Studios</div>
+      <div className={`${className ? 'zentroid-loader-text-black' : 'zentroid-loader-text'}`}>Zentroid Studios</div>
     </div>
   );
 }
@@ -35,10 +35,10 @@ function Model({ path, scale, position, rotation = [0, 0, 0], onLoaded }) {
   );
 }
 
-function ModelFallback() {
+function ModelFallback({ className }) {
   return (
     <Html center>
-      <ZentroidLoader />
+      <ZentroidLoader className={className} />
     </Html>
   );
 }
@@ -53,6 +53,7 @@ function ModelViewer({
   enableZoom = false,
   autoRotate = true,
   onLoaded,
+  className
 }) {
   const [recoverKey, setRecoverKey] = useState(0);
 
@@ -109,7 +110,7 @@ function ModelViewer({
         <ambientLight intensity={1.25} />
         <directionalLight position={[5, 5, 5]} intensity={1.4} />
 
-        <Suspense fallback={<ModelFallback />}>
+        <Suspense fallback={<ModelFallback className={className || ''} />}>
           <Model
             path={path}
             scale={scale}
