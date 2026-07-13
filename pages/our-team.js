@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { Linkedin, Award, Briefcase, Users, TrendingUp, Instagram } from "lucide-react";
 import { Container } from "react-bootstrap";
 import NextImage from "next/image";
-import ShagunaKhetarpal from "@/src/images/shaguna-khetarpal.jpg";
+import ShagunaKhetarpal from "@/src/images/shaguna-khetarpal.webp";
 import teamMember1 from "@/src/images/team/akriti-hr.webp";
 import teamMember2 from "@/src/images/team/team-m2.webp";
 import teamMember3 from "@/src/images/team/team-m3.webp";
@@ -69,6 +69,7 @@ import teamMember56 from "@/src/images/team/team-m56.webp";
 import teamMember57 from "@/src/images/team/team-m57.webp";
 import teamMember58 from "@/src/images/team/team-m58.webp";
 import teamMember59 from "@/src/images/team/team-m59.webp";
+import allteamhere from "@/src/images/all-team.webp";
 
 
 
@@ -237,7 +238,7 @@ export default function OurTeam() {
                   <NextImage src={teamMember44} alt="Promil Kumar" className="team-card-img" />
                 </div>
                 <div className="team-card-body">
-                  <h3 className="team-card-name">Promil Kumar</h3>
+                  <h3 className="team-card-name">Promil Kumar Sharma</h3>
                   <div className="team-card-role">Texturing Manager</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
@@ -733,7 +734,7 @@ export default function OurTeam() {
                 </div>
                 <div className="team-card-body">
                   <h3 className="team-card-name">Abhishek Saini</h3>
-                  <div className="team-card-role">QA manager and Modelling Artist</div>
+                  <div className="team-card-role">QA Manager and Modelling Artist</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
@@ -873,6 +874,23 @@ export default function OurTeam() {
                 </div>
               </motion.div>
             </TeamCarousel>
+          </Container>
+        </section>
+
+        {/* Team Grid */}
+        <section className="team-grid-section pt-0">
+          <Container>
+            <div>
+              <h2 className="about-why-title mb-5 text-center">The People Behind Zentroid</h2>
+            </div>
+
+            <div>
+              <div className="all-team-here">
+                <NextImage src={allteamhere} alt="All Team" className="team-card-img" />
+              </div>
+            </div>
+
+
           </Container>
         </section>
 

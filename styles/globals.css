@@ -4073,6 +4073,21 @@ body {
 }
 
 
+.all-team-here img {
+    object-fit: cover;
+    object-position: center 70%;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    background: #fffc;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    height: 100%;
+    max-height: 640px;
+    transition: transform .5s;
+    box-shadow: 0 4px 20px #00000038;
+}
+
+
 @media (max-width: 768px) {
     .mobile-hide {
         display: none !important;
