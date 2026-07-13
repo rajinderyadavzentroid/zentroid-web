@@ -303,7 +303,7 @@ export default function OurTeam() {
                 </div>
                 <div className="team-card-body">
                   <h3 className="team-card-name">Sanket Raj</h3>
-                  <div className="team-card-role">Texturing Artist</div>
+                  <div className="team-card-role">Jr. Texturing Artist</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
@@ -316,7 +316,7 @@ export default function OurTeam() {
                 </div>
                 <div className="team-card-body">
                   <h3 className="team-card-name">Adesh Dixit</h3>
-                  <div className="team-card-role">Texturing Artist</div>
+                  <div className="team-card-role">Jr. Texturing Artist</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
@@ -729,10 +729,20 @@ export default function OurTeam() {
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
                 <div className="team-card-img-wrap">
-                  <NextImage src={teamMember15} alt="Shabaz Ansari" className="team-card-img" />
+                  <NextImage src={teamMember46} alt="Abhishek Saini" className="team-card-img" />
                 </div>
                 <div className="team-card-body">
-                  <h3 className="team-card-name">Shabaz Ansari</h3>
+                  <h3 className="team-card-name">Abhishek Saini</h3>
+                  <div className="team-card-role">QA manager and Modelling Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember15} alt="Shabaj Ansari" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Shabaj Ansari</h3>
                   <div className="team-card-role">Modelling Artist</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
@@ -799,16 +809,7 @@ export default function OurTeam() {
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
-                <div className="team-card-img-wrap">
-                  <NextImage src={teamMember46} alt="Abhishek Saini" className="team-card-img" />
-                </div>
-                <div className="team-card-body">
-                  <h3 className="team-card-name">Abhishek Saini</h3>
-                  <div className="team-card-role">QA Manager Modelling</div>
-                  {/* <p className="team-card-bio">abcd</p> */}
-                </div>
-              </motion.div>
+
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
                 <div className="team-card-img-wrap">
                   <NextImage src={teamMember59} alt="Jitender Singh" className="team-card-img" />
@@ -830,7 +831,7 @@ export default function OurTeam() {
                 </div>
                 <div className="team-card-body">
                   <h3 className="team-card-name">Akriti Sood</h3>
-                  <div className="team-card-role">Human Resource</div>
+                  <div className="team-card-role">Human Resource Executive</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
