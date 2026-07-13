@@ -58,6 +58,17 @@ import teamMember47 from "@/src/images/team/team-m47.webp";
 import teamMember48 from "@/src/images/team/team-m48.webp";
 import RightArrow2 from "@/src/images/right-arrow.png";
 import teamMember49 from "@/src/images/team/team-m49.webp";
+import teamMember50 from "@/src/images/team/team-m50.webp";
+
+import teamMember51 from "@/src/images/team/team-m51.webp";
+import teamMember52 from "@/src/images/team/team-m52.webp";
+import teamMember53 from "@/src/images/team/team-m53.webp";
+import teamMember54 from "@/src/images/team/team-m54.webp";
+import teamMember55 from "@/src/images/team/team-m55.webp";
+import teamMember56 from "@/src/images/team/team-m56.webp";
+import teamMember57 from "@/src/images/team/team-m57.webp";
+import teamMember58 from "@/src/images/team/team-m58.webp";
+import teamMember59 from "@/src/images/team/team-m59.webp";
 
 
 
@@ -81,9 +92,9 @@ function TeamCarousel({ children }) {
       <div className="team-carousel-grid">{slice}</div>
       {isMobile && total > 1 && (
         <div className="team-carousel-nav">
-          <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0} className="team-carousel-btn"><NextImage src={RightArrow2} alt="prev" width={16} height={16} style={{transform:"rotate(180deg)"}}/></button>
+          <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0} className="team-carousel-btn"><NextImage src={RightArrow2} alt="prev" width={16} height={16} style={{ transform: "rotate(180deg)" }} /></button>
           <span>{page + 1} / {total}</span>
-          <button onClick={() => setPage(p => Math.min(total - 1, p + 1))} disabled={page === total - 1} className="team-carousel-btn"><NextImage src={RightArrow2} alt="next" width={16} height={16}/></button>
+          <button onClick={() => setPage(p => Math.min(total - 1, p + 1))} disabled={page === total - 1} className="team-carousel-btn"><NextImage src={RightArrow2} alt="next" width={16} height={16} /></button>
         </div>
       )}
     </div>
@@ -244,6 +255,40 @@ export default function OurTeam() {
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
                 <div className="team-card-img-wrap">
+                  <NextImage src={teamMember2} alt="Mahim Sood" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Mahim Sood</h3>
+                  <div className="team-card-role">Texturing Manager
+                  </div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember18} alt="Shivam Patidar" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Shivam Patidar</h3>
+                  <div className="team-card-role">Texturing Manager
+                  </div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember47} alt="Chirag Panchal" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Chirag Panchal</h3>
+                  <div className="team-card-role">Texturing Manager
+                  </div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
                   <NextImage src={teamMember38} alt="Sachin Kalshyan" className="team-card-img" />
                 </div>
                 <div className="team-card-body">
@@ -296,17 +341,8 @@ export default function OurTeam() {
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
-                <div className="team-card-img-wrap">
-                  <NextImage src={teamMember2} alt="Mahim Sood" className="team-card-img" />
-                </div>
-                <div className="team-card-body">
-                  <h3 className="team-card-name">Mahim Sood</h3>
-                  <div className="team-card-role">Texturing Artist</div>
-                  {/* <p className="team-card-bio">abcd</p> */}
-                </div>
-              </motion.div>
-           
+
+
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
                 <div className="team-card-img-wrap">
                   <NextImage src={teamMember4} alt="Priyanshu Panda" className="team-card-img" />
@@ -418,16 +454,6 @@ export default function OurTeam() {
                 </div>
                 <div className="team-card-body">
                   <h3 className="team-card-name">Anubhav Kaushal</h3>
-                  <div className="team-card-role">Jr. Texturing Artist</div>
-                  {/* <p className="team-card-bio">abcd</p> */}
-                </div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
-                <div className="team-card-img-wrap">
-                  <NextImage src={teamMember18} alt="Shivam Patidar" className="team-card-img" />
-                </div>
-                <div className="team-card-body">
-                  <h3 className="team-card-name">Shivam Patidar</h3>
                   <div className="team-card-role">Jr. Texturing Artist</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
@@ -568,16 +594,7 @@ export default function OurTeam() {
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
-                <div className="team-card-img-wrap">
-                  <NextImage src={teamMember47} alt="Chirag Panchal" className="team-card-img" />
-                </div>
-                <div className="team-card-body">
-                  <h3 className="team-card-name">Chirag Panchal</h3>
-                  <div className="team-card-role">Jr. Texturing Artist</div>
-                  {/* <p className="team-card-bio">abcd</p> */}
-                </div>
-              </motion.div>
+
 
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
                 <div className="team-card-img-wrap">
@@ -586,6 +603,107 @@ export default function OurTeam() {
                 <div className="team-card-body">
                   <h3 className="team-card-name">Sarthak Adaniya</h3>
                   <div className="team-card-role">Jr. Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember50} alt="Yogesh Sonar" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Yogesh Sonar</h3>
+                  <div className="team-card-role">Jr. Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember3} alt="Abhay Singh Pate" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Abhay Singh Pate</h3>
+                  <div className="team-card-role">Jr. Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember51} alt="Abhishek Zala" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Abhishek Zala</h3>
+                  <div className="team-card-role">Jr. Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember52} alt="Ifran Khan" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Ifran Khan</h3>
+                  <div className="team-card-role">Jr. Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember53} alt="Parmaan" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Parmaan</h3>
+                  <div className="team-card-role">Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember54} alt="Sangam Raj Yadav" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Sangam Raj Yadav</h3>
+                  <div className="team-card-role">Jr.Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember55} alt="Shovan Pal" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Shovan Pal</h3>
+                  <div className="team-card-role">Jr.Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember56} alt="Simranjeet Singh" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Simranjeet Singh</h3>
+                  <div className="team-card-role">Jr.Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember57} alt="Umesh Kumar Bhagat" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Umesh Kumar Bhagat</h3>
+                  <div className="team-card-role">Jr.Texturing Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember58} alt="Harbhajan Singh" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Harbhajan Singh</h3>
+                  <div className="team-card-role">Texturing Artist</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
@@ -691,6 +809,16 @@ export default function OurTeam() {
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember59} alt="Jitender Singh" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Jitender Singh</h3>
+                  <div className="team-card-role">Sr. Modelling Artist</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
             </TeamCarousel>
             <div className="mb-4 mt-4">
               <h3>Human Resources Team</h3>
@@ -703,6 +831,26 @@ export default function OurTeam() {
                 <div className="team-card-body">
                   <h3 className="team-card-name">Akriti Sood</h3>
                   <div className="team-card-role">Human Resource</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember40} alt="Mahima Sharma" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Mahima Sharma</h3>
+                  <div className="team-card-role">Human Resource Executive</div>
+                  {/* <p className="team-card-bio">abcd</p> */}
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
+                <div className="team-card-img-wrap">
+                  <NextImage src={teamMember49} alt="Nishita Bhadwal" className="team-card-img" />
+                </div>
+                <div className="team-card-body">
+                  <h3 className="team-card-name">Nishita Bhadwal</h3>
+                  <div className="team-card-role">Talent Acquisition Associate</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
               </motion.div>
