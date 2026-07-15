@@ -620,10 +620,10 @@ export default function OurTeam() {
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="team-card">
                 <div className="team-card-img-wrap">
-                  <NextImage src={teamMember3} alt="Abhay Singh Pate" className="team-card-img" />
+                  <NextImage src={teamMember3} alt="Abhay Singh Patel" className="team-card-img" />
                 </div>
                 <div className="team-card-body">
-                  <h3 className="team-card-name">Abhay Singh Pate</h3>
+                  <h3 className="team-card-name">Abhay Singh Patel</h3>
                   <div className="team-card-role">Jr. Texturing Artist</div>
                   {/* <p className="team-card-bio">abcd</p> */}
                 </div>
