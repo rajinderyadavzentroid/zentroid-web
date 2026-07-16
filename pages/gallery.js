@@ -23,8 +23,12 @@ const galleryImages = [
   { title: "Diwali Celebration", date: "18 Oct, 2025", category: "Festivals", image: "/images/gallery/diwali-2025-4.webp" },
   { title: "Diwali Celebration", date: "18 Oct, 2025", category: "Festivals", image: "/images/gallery/diwali-2025-5.webp" },
   { title: "Diwali Celebration", date: "18 Oct, 2025", category: "Festivals", image: "/images/gallery/diwali-2025-6.webp" },
-  { title: "Diwali Celebration", date: "18 Oct, 2025", category: "Festivals", image: "/images/gallery/diwali-2025-7.webp" },
   { title: "Diwali Celebration", date: "18 Oct, 2025", category: "Festivals", image: "/images/gallery/diwali-2025-10.webp" },
+  { title: "Independence Day", date: "14 Aug 2025", category: "Festivals", image: "/images/gallery/independence-2025-1.webp", large: true },
+  { title: "Independence Day", date: "14 Aug 2025", category: "Festivals", image: "/images/gallery/independence-2025-2.webp" },
+  { title: "Independence Day", date: "14 Aug 2025", category: "Festivals", image: "/images/gallery/independence-2025-3.webp" },
+  { title: "Independence Day", date: "14 Aug 2025", category: "Festivals", image: "/images/gallery/independence-2025-4.webp" },
+
   { title: "Shimla Trip", date: "30 Nov 2025", category: "Team Outings", image: "/images/gallery/shimla-2025-1.webp", large: true },
   { title: "Shimla Trip", date: "30 Nov 2025", category: "Team Outings", image: "/images/gallery/shimla-2025-2.webp" },
   { title: "Shimla Trip", date: "30 Nov 2025", category: "Team Outings", image: "/images/gallery/shimla-2025-3.webp" },
@@ -44,6 +48,7 @@ const galleryImages = [
 
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState("All Events");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const filteredImages = activeCategory === "All Events"
     ? galleryImages
@@ -115,6 +120,8 @@ export default function Gallery() {
                   transition={{ duration: 0.4, delay: index * 0.04 }}
                   viewport={{ once: true }}
                   className={`glr-card ${item.large ? "glr-card-large" : ""}`}
+                  onClick={() => setSelectedImage(item)}
+                  style={{ cursor: "pointer" }}
                 >
                   <img src={item.image} alt={item.title} />
                   <div className="glr-card-overlay">
@@ -166,6 +173,33 @@ export default function Gallery() {
         </section>
 
       </Layout>
+
+      {/* Lightbox */}
+      {selectedImage && (
+        <div
+          onClick={() => setSelectedImage(null)}
+          style={{
+            position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            zIndex: 9999, padding: "20px"
+          }}
+        >
+          <button
+            onClick={() => setSelectedImage(null)}
+            style={{
+              position: "absolute", top: 20, right: 28,
+              background: "none", border: "none", color: "#fff",
+              fontSize: 36, cursor: "pointer", lineHeight: 1
+            }}
+          >&times;</button>
+          <img
+            src={selectedImage.image}
+            alt={selectedImage.title}
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: "90vw", maxHeight: "90vh", borderRadius: 8, objectFit: "contain" }}
+          />
+        </div>
+      )}
 
     </>
   );
