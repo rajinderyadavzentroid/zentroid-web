@@ -109,6 +109,7 @@ export default function Header() {
                 <Link href="/our-service" className="mobile-nav-link">Services</Link>
                 <Link href="/portfolio" className="mobile-nav-link">Portfolio</Link>
                 <Link href="/about-us" className="mobile-nav-link">About</Link>
+                <Link href="/gallery" className="mobile-nav-link">Gallery</Link>
                 <Link href="/our-team" className="mobile-nav-link">Team</Link>
                 <Link href="/contact" className="mobile-nav-link">Contact</Link>
                 <Link href="/contact">
