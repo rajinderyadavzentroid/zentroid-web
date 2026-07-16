@@ -74,6 +74,9 @@ export default function Header() {
                 <Link href="/about-us" className={`nav-link ${isActive('/about-us') ? 'nav-link-active' : ''}`}>
                   About
                 </Link>
+                <Link href="/gallery" className={`nav-link ${isActive('/gallery') ? 'nav-link-active' : ''}`}>
+                  Gallery
+                </Link>
                 <Link href="/our-team" className={`nav-link ${isActive('/our-team') ? 'nav-link-active' : ''}`}>
                   Team
                 </Link>
