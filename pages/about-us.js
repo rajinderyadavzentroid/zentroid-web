@@ -19,7 +19,7 @@ export default function AboutUs() {
   const stats = [
     { number: "500+", label: "Projects Completed" },
     { number: "150+", label: "Happy Clients" },
-    { number: "8+", label: "Years of Experience" },
+    { number: "5+", label: "Years of Experience" },
   ];
 
   return (

@@ -38,12 +38,12 @@ const galleryImages = [
   { title: "Shimla Trip", date: "30 Nov 2025", category: "Team Outings", image: "/images/gallery/shimla-2025-7.webp" },
   { title: "Shimla Trip", date: "30 Nov 2025", category: "Team Outings", image: "/images/gallery/shimla-2025-8.webp" },
   { title: "Shimla Trip", date: "30 Nov 2025", category: "Team Outings", image: "/images/gallery/shimla-2025-9.webp" },
-  { title: "Tambola Night", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-1.webp", large: true },
-  { title: "Tambola Night", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-2.webp" },
-  { title: "Tambola Night", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-3.webp" },
-  { title: "Tambola Night", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-4.webp" },
-  { title: "Tambola Night", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-5.webp" },
-  { title: "Tambola Night", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-6.webp" },
+  { title: "Tambola", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-1.webp", large: true },
+  { title: "Tambola", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-2.webp" },
+  { title: "Tambola", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-3.webp" },
+  { title: "Tambola", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-4.webp" },
+  { title: "Tambola", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-5.webp" },
+  { title: "Tambola", date: "19 Jul 2025", category: "Office Life", image: "/images/gallery/tambola-2025-6.webp" },
 ];
 
 export default function Gallery() {
