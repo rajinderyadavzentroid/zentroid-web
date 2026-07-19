@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 export default async function handler(req, res) {
+  return res.status(503).json({ success: false, message: "Contact form is temporarily unavailable." });
+
   if (req.method !== "POST")
     return res.status(405).json({ message: "Method not allowed" });
   const { name, email, phone, message } = req.body;
