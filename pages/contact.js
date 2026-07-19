@@ -47,6 +47,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    return; // Disable form submission as per the recent changes
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
@@ -151,7 +152,8 @@ export default function Contact() {
                     )}
                     {status === "error" && <p style={{ color: "red" }}>There is some issue, please try after some time.</p>}
                     <motion.button type="submit" disabled={status === "sending"} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="contact-submit-btn">
-                      <Send className="contact-submit-icon" /> {status === "sending" ? "Sending..." : "Send Message"}
+                      {/* <Send className="contact-submit-icon" /> {status === "sending" ? "Sending..." : "Send Message"} */}
+                      <Send className="contact-submit-icon" /> {"Unfortunately, the contact form is currently disabled. Please reach out to us via email or schedule a call."}
                     </motion.button>
                   </form>
                 </div>
