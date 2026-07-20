@@ -139,8 +139,28 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, message: "Message must be between 1 and 2000 characters." });
   }
 
-  // ── 6. ALL CHECKS PASSED — send email ─────────────────────────────────────
-  log(ip, userAgent, true, "accepted");
+  // ── 6. RECAPTCHA VERIFICATION ─────────────────────────────────────────────
+  const { captchaToken } = req.body || {};
+
+  if (!captchaToken) {
+    log(ip, userAgent, false, "missing_captcha");
+    return res.status(400).json({ success: false, message: "Captcha token missing." });
+  }
+
+  const captchaRes = await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
+    { method: "POST" }
+  );
+  const captchaData = await captchaRes.json();
+
+  // score < 0.5 means likely a bot (0.0 = bot, 1.0 = human)
+  if (!captchaData.success || captchaData.score < 0.5) {
+    log(ip, userAgent, false, `captcha_failed:score=${captchaData.score}`);
+    return res.status(403).json({ success: false, message: "Captcha verification failed." });
+  }
+
+  // ── 7. ALL CHECKS PASSED — send email ─────────────────────────────────────
+  log(ip, userAgent, true, `accepted:captcha_score=${captchaData.score}`);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",

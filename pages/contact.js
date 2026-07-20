@@ -2,11 +2,13 @@ import Head from "next/head";
 import Layout from "@/src/component/Layout";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Instagram } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { Container } from "react-bootstrap";
 
 export default function Contact() {
 
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState({ name: "", email: "", projectDetails: "" });
   const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
@@ -46,13 +48,15 @@ export default function Contact() {
     return errs;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
+    if (!executeRecaptcha) return;
     setErrors({});
     setStatus("sending");
     try {
+      const captchaToken = await executeRecaptcha("contact_form");
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -62,6 +66,7 @@ export default function Contact() {
           message: formData.projectDetails,
           website: "",
           submittedAt: pageLoadTime,
+          captchaToken,
         }),
       });
       const data = await res.json();
@@ -75,7 +80,7 @@ export default function Contact() {
     } catch (err) {
       setStatus("error");
     }
-  };
+  }, [executeRecaptcha, formData, pageLoadTime]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
