@@ -4361,6 +4361,12 @@ body {
     display: block;
 }
 
+
+.fit-img-set {
+    object-fit: cover;
+    object-position: center 30%;
+}
+
 .glr-card:hover img {
     transform: scale(1.08);
 }
