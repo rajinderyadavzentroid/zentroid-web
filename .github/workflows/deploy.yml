@@ -1,0 +1,48 @@
+name: Deploy Zentroid
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+
+          script: |
+            set -e
+
+            echo "================================"
+            echo "Starting Zentroid deployment"
+            echo "================================"
+
+            cd /home/deploy/apps/zentroid-web
+
+            echo "Pulling latest code..."
+            git fetch origin
+            git reset --hard origin/master
+
+            echo "Installing dependencies..."
+            npm ci
+
+            echo "Building Next.js..."
+            npm run build
+
+            echo "Restarting PM2..."
+            pm2 restart zentroid-web
+
+            echo "Checking PM2..."
+            pm2 status
+
+            echo "================================"
+            echo "Deployment completed!"
+            echo "================================"
