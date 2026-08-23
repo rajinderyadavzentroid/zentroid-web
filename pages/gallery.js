@@ -30,6 +30,7 @@ const galleryImages = [
   { title: "Independence Day", date: "2025", category: "Festivals", image: "/images/gallery/independence-2025-4.webp" },
 
 
+
   { title: "Christmas", date: "2025", category: "Festivals", image: "/images/gallery/christmas-2025-6.webp", large: true, className: "fit-img-set" },
   { title: "Christmas", date: "2025", category: "Festivals", image: "/images/gallery/christmas-2025-2.webp", className: "fit-img-set" },
   { title: "Christmas", date: "2025", category: "Festivals", image: "/images/gallery/christmas-2025-3.webp" },
