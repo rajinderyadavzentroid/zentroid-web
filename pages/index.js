@@ -23,6 +23,9 @@ import Image from "next/image";
 import Favicon from "../src/images/favicon.ico";
 
 function ZentroidPageLoader({ className }) {
+
+
+
   return (
     <div className={`${className ? 'zentroid-loader-showcase' : 'zentroid-loader'}`}>
       <div className="zentroid-loader-ring" />
@@ -72,8 +75,13 @@ function LazyModelViewer(props) {
   );
 }
 
+
+
+
 export default function Home() {
   const router = useRouter();
+
+  consol.log('test live');
 
   const models = [
     {
@@ -633,6 +641,8 @@ export default function Home() {
             </div>
           </Container>
         </section>
+
+        {/* hello testing */}
 
         <section className="cta-section">
           <div className="cta-content">
