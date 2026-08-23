@@ -81,8 +81,6 @@ function LazyModelViewer(props) {
 export default function Home() {
   const router = useRouter();
 
-  consol.log('test live');
-
   const models = [
     {
       id: 1,
