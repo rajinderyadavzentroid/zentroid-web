@@ -42,6 +42,7 @@ const galleryImages = [
 
   { title: "Shimla Trip", date: "2025", category: "Team Outings", image: "/images/gallery/shimla-2025-1.webp", large: true },
   { title: "Shimla Trip", date: "2025", category: "Team Outings", image: "/images/gallery/shimla-2025-2.webp" },
+  // { title: "Shimla Trip", date: "2025", category: "Team Outings", image: "/images/team/akriti-hr.webp" },
   { title: "Shimla Trip", date: "2025", category: "Team Outings", image: "/images/gallery/shimla-2025-3.webp" },
   { title: "Shimla Trip", date: "2025", category: "Team Outings", image: "/images/gallery/shimla-2025-4.webp" },
   { title: "Shimla Trip", date: "2025", category: "Team Outings", image: "/images/gallery/shimla-2025-5.webp" },
@@ -141,7 +142,7 @@ export default function Gallery() {
                   onClick={() => setSelectedImage(item)}
                   style={{ cursor: "pointer" }}
                 >
-                  <img src={item.image} alt={item.title} className={item.className || ""} />
+                  <img src={typeof item.image === "object" ? item.image.src : item.image} alt={item.title} className={item.className || ""} />
                   <div className="glr-card-overlay">
                     <span className="glr-card-cat">{item.category}</span>
                     <h4 className="glr-card-title">{item.title}</h4>
@@ -211,7 +212,7 @@ export default function Gallery() {
             }}
           >&times;</button>
           <img
-            src={selectedImage.image}
+            src={typeof selectedImage.image === "object" ? selectedImage.image.src : selectedImage.image}
             alt={selectedImage.title}
             onClick={(e) => e.stopPropagation()}
             style={{ maxWidth: "90vw", maxHeight: "90vh", borderRadius: 8, objectFit: "contain" }}
